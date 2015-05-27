@@ -12,7 +12,7 @@ class Uploader
             $wp_filetype = $movefile['type'];
             $filename = $movefile['file'];
             $wp_upload_dir = wp_upload_dir();
-            return  $wp_upload_dir . $filename;
+            return  $wp_upload_dir['url'] . '/' . basename($filename);
             
 //             $attachment = array(
 //                 'guid' => $wp_upload_dir['url'] . '/' . basename( $filename ),

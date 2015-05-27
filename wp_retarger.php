@@ -10,6 +10,7 @@
  */
 // require 'Retarger.php';
 require 'classes/RoutersTable.php';
+require 'classes/Uploader.php';
 
 $url_plugin = WP_PLUGIN_URL . "wp_retarger";
 $myOptions = array();
@@ -60,6 +61,9 @@ function add_options()
         
         if ($field_hidden == 'S') {
             
+            $uploader = new Uploader();
+            $url_filename = $uploader->write();
+            
             $aux = array(
                 'name_router' => esc_html($_POST['name_router']),
                 'urlembed_router' => esc_html($_POST['urlembed_router']),
@@ -67,6 +71,7 @@ function add_options()
             );
             
             array_push($myOptions, $aux);
+            
             // $wp_retarger_pixel = esc_html($_POST['wp_retarger_pixel']);
             // $myOptions['wp_retarger_pixel'] = $wp_retarger_pixel;
             // $myOptions['last_update'] = time();

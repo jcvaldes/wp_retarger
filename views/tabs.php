@@ -15,75 +15,77 @@
 					<div class="postbox">
 
 						<div class="inside">
-						      
-							<div role="tabpanel">
-                                <h3 class="nav-tab-wrapper">
-										<a class="nav-tab nav-tab-active"
-											rel="avp_unicode_charkbd_admin_menu_panel_0"
-											href="javascript:void( 0 );"
-											title="Click to change display to Braille"> Router </a> 
-										<a class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_1"
-											href="javascript:void( 0 );"
-											title="Click to change display to Common"> Picture Redirect </a> <a
-											class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_2"
-											href="javascript:void( 0 );"
-											title="Click to change display to Computers"> Popup </a>
-										<a class="nav-tab"
-											rel="avp_unicode_charkbd_admin_menu_panel_3"
-											href="javascript:void( 0 );"
-											title="Click to change display to Dingbats"> Pixel </a> 
-									</h3>
-								<!-- Nav tabs -->
-								<form name="wp_retarger_form" method="post" action="">
 
-                                    <input type="hidden" name="wp_retarger_form_send" value="S" />
-									
-                                    <table class="form-table nav-tab-contents"
+							<div role="tabpanel">
+								<h3 class="nav-tab-wrapper">
+									<a class="nav-tab nav-tab-active"
+										rel="avp_unicode_charkbd_admin_menu_panel_0"
+										href="javascript:void( 0 );"
+										title="Click to change display to Braille"> Router </a> <a
+										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_1"
+										href="javascript:void( 0 );"
+										title="Click to change display to Common"> Picture Redirect </a>
+									<a class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_2"
+										href="javascript:void( 0 );"
+										title="Click to change display to Computers"> Popup </a> <a
+										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_3"
+										href="javascript:void( 0 );"
+										title="Click to change display to Dingbats"> Pixel </a>
+								</h3>
+								<!-- Nav tabs -->
+								<form name="wp_retarger_form" method="post" action="" enctype="multipart/form-data">
+
+									<input type="hidden" name="wp_retarger_form_send" value="S" />
+
+									<table class="form-table nav-tab-contents"
 										id='avp_unicode_charkbd_admin_menu_panel_0'>
 										<col width=" 10%">
 										<col width="90%">
+										<tr valign="top" class="even">
+											<td><strong>Name</strong></td>
+											<td><input type="text" id="name_router" name="name_router"
+												style="width: 30%" /></td>
+										</tr>
+										<tr valign="top" class="odd">
+											<td><strong>Url Embed</strong></td>
+											<td><input type="text" id="urlembed_router"
+												name="urlembed_router" style="width: 30%" /></td>
+
+										</tr>
+
+
+									</table>
+									<table class="form-table nav-tab-contents"
+										id='avp_unicode_charkbd_admin_menu_panel_1'
+										style='display: none;'>
+
+
+										<tbody>
 											<tr valign="top" class="even">
-												<td><strong>Name</strong></td>
-												<td><input type="text" id="name_router" name="name_router" style="width:30%"/></td>
-											</tr>											
+												<td><strong>Url Image</strong></td>
+												<td><input type="text" id="url_image_redirect"
+													name="url_image_redirect" style="width: 50%"/><input type="file" name="myfile"
+													id="myfile"></td>
+											</tr>
 											<tr valign="top" class="odd">
-                                                <td><strong>Url Embed</strong></td>
-												<td><input type="text" id="urlembed_router" name="urlembed_router" style="width:30%" /></td>
-											
+												<td><strong>Description</strong></td>
+												<td><input type="text" id="url_image_redirect" 
+													name="url_image_redirect" style="width: 50%" /></td>
 											</tr>
 										
 
-									</table>
-                                    <table class="form-table nav-tab-contents"
-										id='avp_unicode_charkbd_admin_menu_panel_1'
-										style='display: none;'>
-										
-										
-										<tbody>
-											<tr valign="top" class="even">
-                                                <td><strong>Url Image</strong></td>
-											    <td><input type="text" id="url_image_redirect" name="url_image_redirect" /></td>
-											</tr>
-											<tr valign="top" class="odd">
-                                                <td><strong>Description</strong></td>
-											    <td><input type="text" id="url_image_redirect" name="url_image_redirect" /></td>
-											</tr>
-											<tr valign="top" class="even">
-    									       <td><label for="file">Filename:</label></td>
-                                                <td><input type="file" name="myfile" id="myfile"></td>
-                                            </tr>
-    
 										</tbody>
 
 									</table>
 									<table class="form-table nav-tab-contents"
 										id='avp_unicode_charkbd_admin_menu_panel_3'
 										style='display: none;'>
-										
-										
+
+
 										<tbody>
 											<tr valign="top" class="even">
-												<td><textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80"><?= $wp_retarger_pixel ?></textarea>.</td>
+												<td><textarea id="wp_retarger_pixel"
+														name="wp_retarger_pixel" rows="5" cols="80"><?= $wp_retarger_pixel ?></textarea>.</td>
 											</tr>
 										</tbody>
 
