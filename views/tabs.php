@@ -85,12 +85,33 @@
 
 										<tbody>
 											<tr valign="top" class="even">
-												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" /></td>
-												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" /></td>
-												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" /></td>
-												
-												
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" /><div class="pt-10"/><input type="radio" name="popup-type"  value="1"><strong>Type 1</strong></td>												
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" /><div class="pt-10"/><input type="radio" name="popup-type"  value="1"><strong>Type 2</strong></td>
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" /><div class="pt-10"/><input type="radio" name="popup-type"  value="1"><strong>Type 3</strong></td>																								
 											</tr>
+											<tr>
+											<td colspan="3">
+											 <strong>Popup Type 1: </strong> 
+											 Por Url: <input type="radio" name="popup-type1"  value="1">
+											 Por HTML: <input type="radio" name="popup-type1"  value="2">
+											</td>
+											</tr>
+											
+											<tr>
+											<td colspan="3">
+											 <strong>Dimensiones: </strong> 
+											 Ancho: <input type="text" name="popup-width"  value="800" maxlength="4"  style="width:50px">px
+											 Alto: <input type="text" name="popup-height"  value="600" maxlength="4" style="width:50px">px
+											</td>
+											</tr>
+											
+										    <tr>
+											<td colspan="3">
+											 <strong>URL: </strong> 
+											 <input type="text" name="url-popup"  maxlength="255"  style="width:500px">
+											</td>
+											</tr>
+											
 										</tbody>
 
 									</table>

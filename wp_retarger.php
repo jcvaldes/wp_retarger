@@ -149,8 +149,16 @@ function wp_retarger_enqueue_scripts()
     wp_enqueue_script('jquery');
     // wp_enqueue_script( 'my-jquery-tabs', plugin_dir_url(__FILE__ ) . '/js/tabs.js' , array( 'jquery-ui-core', 'jquery-ui-tabs' ), false, false );
     wp_register_script('my-jquery-tabs', plugin_dir_url(__FILE__) . '/js/tabs.js');
-
     wp_enqueue_script('my-jquery-tabs');
+    
+}
+add_action('admin_head', 'wp_retarger_enqueue_scripts');
+
+function wp_retarger_enqueue_styles()
+{
+    wp_register_style('admin-styles', plugin_dir_url(__FILE__) . '/css/admin.css');
+    wp_enqueue_style('admin-styles');
+
 }
 
-add_action('admin_head', 'wp_retarger_enqueue_scripts');
+add_action('admin_head', 'wp_retarger_enqueue_styles');
