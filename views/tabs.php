@@ -78,6 +78,22 @@
 										</tbody>
 
 									</table>
+									<table class="form-table nav-tab-contents"
+										id='avp_unicode_charkbd_admin_menu_panel_2'
+										style='display: none;'>
+
+
+										<tbody>
+											<tr valign="top" class="even">
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" /></td>
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" /></td>
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" /></td>
+												
+												
+											</tr>
+										</tbody>
+
+									</table>
 									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
 
 
