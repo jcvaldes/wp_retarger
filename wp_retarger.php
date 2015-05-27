@@ -35,9 +35,14 @@ function wp_retarger_menu_page()
         wp_die('Access Denied');
     }
     global $myListTable;
+    global $edit;
 
     if($myListTable->current_action() == 'delete'){
         delete_options();
+    }
+
+    if($myListTable->current_action() == 'edit'){
+        prepare_edit();
     }
 
     echo '<div class="wrap"><h2>My Routers</h2>';
@@ -60,7 +65,22 @@ function add_options()
     if ($_POST['wp_retarger_form_send']) {
         $field_hidden = esc_html($_POST['wp_retarger_form_send']);
 
-        if ($field_hidden == 'S') {
+        if($_POST['_action'] == 'edit'){
+
+            foreach ($myOptions as $key => $val) {
+               if ($val['ID'] == $_POST['id']) {
+
+                    $myOptions[$key] = array(
+                        'ID' => $val['ID'],
+                        'name_router' => esc_html($_POST['name_router']),
+                        'urlembed_router' => esc_html($_POST['urlembed_router']),
+                        'pixel' => esc_html($_POST['wp_retarger_pixel'])
+                    );
+               }
+            }
+            update_option('wp_retarger', $myOptions);
+
+        }else if ($field_hidden == 'S') {
 
             $uploader = new Uploader();
             $url_filename = $uploader->write();
@@ -108,6 +128,21 @@ function delete_options(){
     update_option('wp_retarger', $myOptions);
     $myListTable = new RoutersTable($myOptions);
 }
+
+function prepare_edit(){
+    global $myListTable;
+    global $edit;
+    $myOptions = (get_option('wp_retarger')) ? get_option('wp_retarger') : [];
+
+    $id = $_REQUEST['router'];
+
+    foreach ($myOptions as $key => $val) {
+       if ($val['ID'] == $id) {
+           $edit = $myOptions[$key];
+       }
+    }
+}
+
 
 function wp_retarger_enqueue_scripts()
 {

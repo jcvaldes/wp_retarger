@@ -33,67 +33,69 @@
 										title="Click to change display to Dingbats"> Pixel </a>
 								</h3>
 								<!-- Nav tabs -->
-								<form name="wp_retarger_form" method="post" action="" enctype="multipart/form-data">
+								<form name="wp_retarger_form" method="post" action="?page=wp_retarger" enctype="multipart/form-data">
 
 									<input type="hidden" name="wp_retarger_form_send" value="S" />
 
-									<table class="form-table nav-tab-contents"
-										id='avp_unicode_charkbd_admin_menu_panel_0'>
+									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_0'>
 										<col width=" 10%">
-										<col width="90%">
-										<tr valign="top" class="even">
-											<td><strong>Name</strong></td>
-											<td><input type="text" id="name_router" name="name_router"
-												style="width: 30%" /></td>
-										</tr>
-										<tr valign="top" class="odd">
-											<td><strong>Url Embed</strong></td>
-											<td><input type="text" id="urlembed_router"
-												name="urlembed_router" style="width: 30%" /></td>
+											<col width="90%">
+												<tr valign="top" class="even">
+													<td><strong>Name</strong></td>
+													<td>
+														<input type="text" id="name_router" name="name_router" style="width: 30%" value="<?= $edit['name_router'] ?>" />
+													</td>
+												</tr>
+												<tr valign="top" class="odd">
+													<td><strong>Url Embed</strong></td>
+													<td>
+														<input type="text" id="urlembed_router" name="urlembed_router" style="width: 30%" value="<?= $edit['urlembed_router'] ?>" />
+													</td>
 
-										</tr>
+												</tr>
 
 
 									</table>
-									<table class="form-table nav-tab-contents"
-										id='avp_unicode_charkbd_admin_menu_panel_1'
-										style='display: none;'>
+									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_1' style='display: none;'>
 
 
 										<tbody>
 											<tr valign="top" class="even">
 												<td><strong>Url Image</strong></td>
-												<td><input type="text" id="url_image_redirect"
-													name="url_image_redirect" style="width: 50%"/><input type="file" name="myfile"
-													id="myfile"></td>
+												<td>
+													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%" />
+													<input type="file" name="myfile" id="myfile">
+												</td>
 											</tr>
 											<tr valign="top" class="odd">
 												<td><strong>Description</strong></td>
-												<td><input type="text" id="url_image_redirect" 
-													name="url_image_redirect" style="width: 50%" /></td>
+												<td>
+													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%" />
+												</td>
 											</tr>
-										
+
 
 										</tbody>
 
 									</table>
-									<table class="form-table nav-tab-contents"
-										id='avp_unicode_charkbd_admin_menu_panel_3'
-										style='display: none;'>
+									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
 
 
 										<tbody>
 											<tr valign="top" class="even">
-												<td><textarea id="wp_retarger_pixel"
-														name="wp_retarger_pixel" rows="5" cols="80"><?= $wp_retarger_pixel ?></textarea>.</td>
+												<td>
+													<textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80"><?= $edit['pixel'] ?></textarea></td>
 											</tr>
 										</tbody>
 
 									</table>
 									<p>
-										<input class="button-primary" type="submit"
-											name="wp_retarger_username_submit" value="Guardar" />
+										<input class="button-primary" type="submit" name="wp_retarger_username_submit" value="Guardar" />
 									</p>
+									<?php if(isset($edit['ID'])){ ?>
+											<input type="hidden" name="_action" value="edit">
+											<input type="hidden" name="id" value="<?= $edit['ID'] ?>">
+									<?php } ?>
 								</form>
 
 
@@ -120,16 +122,15 @@
 
 						<h3>
 							<span><?php
-    
+
     esc_attr_e('Sidebar Content Header', 'wp_admin_style');
     ?></span>
 						</h3>
 
 						<div class="inside">
-							<p><?php
-    
-    esc_attr_e('Everything you see here, from the documentation to the code itself, was created by and for the community. WordPress is an Open Source project, which means there are hundreds of people all over the world working on it. (More than most commercial platforms.) It also means you are free to use it for anything from your cat’s home page to a Fortune 500 web site without paying anyone a license fee and a number of other important freedoms.', 'wp_admin_style');
-    ?></p>
+							<p>
+								<?php esc_attr_e( 'Everything you see here, from the documentation to the code itself, was created by and for the community. WordPress is an Open Source project, which means there are hundreds of people all over the world working on it. (More than most commercial platforms.) It also means you are free to use it for anything from your cat’s home page to a Fortune 500 web site without paying anyone a license fee and a number of other important freedoms.', 'wp_admin_style'); ?>
+							</p>
 						</div>
 						<!-- .inside -->
 
