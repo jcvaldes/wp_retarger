@@ -99,7 +99,11 @@ class RoutersTable extends WP_List_Table
     {
         $actions = array(
             'edit' => sprintf('<a href="?page=%s&action=%s&router=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['ID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&router=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['ID'])
+            'delete' => sprintf('<a href="?page=%s&action=%s&router=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['ID']),
+            'view' => sprintf('<a target="_blank" href=%s>View</a>',  get_site_url() . '/' . $item['name_router']   )
+            
+            
+            
         );
         
         return sprintf('%1$s %2$s', $item['name_router'], $this->row_actions($actions));
