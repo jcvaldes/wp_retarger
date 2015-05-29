@@ -82,6 +82,27 @@ function add_options()
 
         }else if ($field_hidden == 'S') {
 
+            /* IFRAME */
+
+            $iframe = '<iframe src="'.$_POST['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>';
+            /* Create Post */
+
+            $template = plugin_dir_path(__FILE__) . 'views/post.php';
+
+            // Create post object
+            $my_post = array(
+              'post_title'    => wp_strip_all_tags($_POST['name_router']),
+              'post_content'  => $iframe,
+              'post_status'   => 'publish',
+              'post_name'     => $_POST['name_router'],
+              'post_type'     => 'page',
+              'page_template' => 'empty.php'
+            );
+
+            // Insert the post into the database
+            wp_insert_post( $my_post );
+
+
             $uploader = new Uploader();
             $url_filename = $uploader->write();
 
@@ -93,6 +114,8 @@ function add_options()
             );
 
             array_push($myOptions, $aux);
+
+
 
             // $wp_retarger_pixel = esc_html($_POST['wp_retarger_pixel']);
             // $myOptions['wp_retarger_pixel'] = $wp_retarger_pixel;
@@ -150,7 +173,7 @@ function wp_retarger_enqueue_scripts()
     // wp_enqueue_script( 'my-jquery-tabs', plugin_dir_url(__FILE__ ) . '/js/tabs.js' , array( 'jquery-ui-core', 'jquery-ui-tabs' ), false, false );
     wp_register_script('my-jquery-tabs', plugin_dir_url(__FILE__) . '/js/tabs.js');
     wp_enqueue_script('my-jquery-tabs');
-    
+
 }
 add_action('admin_head', 'wp_retarger_enqueue_scripts');
 
