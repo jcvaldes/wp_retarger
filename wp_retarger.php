@@ -11,15 +11,13 @@
 // require 'Retarger.php';
 require 'classes/RoutersTable.php';
 require 'classes/Uploader.php';
+require 'classes/Retarger.php';
 
 $url_plugin = WP_PLUGIN_URL . "wp_retarger";
 $myOptions = array();
 
-// $retarguer = new Retarger();
-// add_action('admin_menu', array(
-// $retarguer,
-// 'CreateMenu'
-// ));
+$retarger = new Retarger();
+//var_dump($retarger->find('5568d7865ca6a'));exit;
 
 function register_wp_retarger_menu_page()
 {
@@ -70,19 +68,18 @@ function add_options()
             foreach ($myOptions as $key => $val) {
                if ($val['ID'] == $_POST['id']) {
 
-                    $myOptions[$key] = array(
-                        'ID' => $val['ID'],
-                        'name_router' => esc_html($_POST['name_router']),
-                        'urlembed_router' => esc_html($_POST['urlembed_router']),
-                        'pixel' => esc_html($_POST['wp_retarger_pixel'])
-                    );
+                    $myOptions[$key]['ID']  =   $val['ID'];
+                    $myOptions[$key]['name_router'] =   esc_html($_POST['name_router']);
+                    $myOptions[$key]['urlembed_router'] =   esc_html($_POST['urlembed_router']);
+                    $myOptions[$key]['pixel']   =   esc_html($_POST['wp_retarger_pixel']);
                }
             }
             update_option('wp_retarger', $myOptions);
 
         }else if ($field_hidden == 'S') {
-
             /* IFRAME */
+
+            $pixel = esc_html($_POST['wp_retarger_pixel']);
 
             $iframe = '<iframe src="'.$_POST['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>';
             /* Create Post */
@@ -92,7 +89,7 @@ function add_options()
             // Create post object
             $my_post = array(
               'post_title'    => wp_strip_all_tags($_POST['name_router']),
-              'post_content'  => $iframe,
+              'post_content'  => $pixel . $iframe,
               'post_status'   => 'publish',
               'post_name'     => $_POST['name_router'],
               'post_type'     => 'page',
@@ -100,8 +97,7 @@ function add_options()
             );
 
             // Insert the post into the database
-            wp_insert_post( $my_post );
-
+            $post_id = wp_insert_post( $my_post );
 
             $uploader = new Uploader();
             $url_filename = $uploader->write();
@@ -110,16 +106,11 @@ function add_options()
                 'ID' => uniqid(),
                 'name_router' => esc_html($_POST['name_router']),
                 'urlembed_router' => esc_html($_POST['urlembed_router']),
-                'pixel' => esc_html($_POST['wp_retarger_pixel'])
+                'pixel' => esc_html($_POST['wp_retarger_pixel']),
+                'post_id' => $post_id
             );
 
             array_push($myOptions, $aux);
-
-
-
-            // $wp_retarger_pixel = esc_html($_POST['wp_retarger_pixel']);
-            // $myOptions['wp_retarger_pixel'] = $wp_retarger_pixel;
-            // $myOptions['last_update'] = time();
             update_option('wp_retarger', $myOptions);
         }
     }
@@ -138,17 +129,13 @@ function add_options()
 
 function delete_options(){
     global $myListTable;
-    $myOptions = (get_option('wp_retarger')) ? get_option('wp_retarger') : [];
+
 
     $id = $_REQUEST['router'];
 
-    foreach ($myOptions as $key => $val) {
-       if ($val['ID'] == $id) {
-           unset($myOptions[$key]);
-       }
-    }
 
-    update_option('wp_retarger', $myOptions);
+
+
     $myListTable = new RoutersTable($myOptions);
 }
 
