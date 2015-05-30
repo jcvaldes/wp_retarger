@@ -5,15 +5,15 @@ if (! class_exists('WP_List_Table')) {
 
 class RoutersTable extends WP_List_Table
 {
- 
+
     var $found_data = array();
-       
+
     var $example_data = array();
 
     function __construct($example_data)
     {
         global $status, $page;
-        
+
         parent::__construct(array(
             'singular' => __('router', 'mylisttable'), // singular name of the listed records
             'plural' => __('routers', 'mylisttable'), // plural name of the listed records
@@ -21,7 +21,7 @@ class RoutersTable extends WP_List_Table
         ) // does this table support ajax?
 
         );
-        
+
         $this->example_data = $example_data;
         add_action('admin_head', array(
             &$this,
@@ -100,12 +100,9 @@ class RoutersTable extends WP_List_Table
         $actions = array(
             'edit' => sprintf('<a href="?page=%s&action=%s&router=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['ID']),
             'delete' => sprintf('<a href="?page=%s&action=%s&router=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['ID']),
-            'view' => sprintf('<a target="_blank" href=%s>View</a>',  get_site_url() . '/' . $item['name_router']   )
-            
-            
-            
+            'view' => sprintf('<a target="_blank" href="%s">View</a>',  get_permalink($item['post_id'])   )
         );
-        
+
         return sprintf('%1$s %2$s', $item['name_router'], $this->row_actions($actions));
     }
 
@@ -136,14 +133,14 @@ class RoutersTable extends WP_List_Table
             &$this,
             'usort_reorder'
         ));
-        
+
         $per_page = 5;
         $current_page = $this->get_pagenum();
         $total_items = count($this->example_data);
-        
+
         // only ncessary because we have sample data
         $this->found_data = array_slice($this->example_data, (($current_page - 1) * $per_page), $per_page);
-        
+
         $this->set_pagination_args(array(
             'total_items' => $total_items, // WE have to calculate the total number of items
             'per_page' => $per_page
@@ -183,7 +180,7 @@ function my_render_list_page()
 	<input type="hidden" name="page" value="ttest_list_table">
     <?php
     $myListTable->search_box('search', 'search_id');
-    
+
     $myListTable->display();
     echo '</form></div>';
 }
