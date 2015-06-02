@@ -60,6 +60,8 @@ function wp_retarger_menu_page()
 function add_options()
 {
     global $retarger;
+
+    //var_dump($_POST);exit;
     //update
     if ($_POST['action'] == 'update') {
         $retarger->update($_POST);

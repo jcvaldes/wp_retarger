@@ -15,6 +15,17 @@ class Retarger
     }
 
     public function store($data){
+        /* TYPE */
+        $popup = [];
+        if($data['popup-type'] == 2){
+            $popup = [  'width' => $data['popup-width'],
+                        'height' => $data['popup-height'],
+                        'show' => $data['popup-show'],
+                        'url' => $data['url-popup'],
+                        'html' => $data['html-popup']
+            ];
+        }
+
         /* IFRAME */
 
         $pixel = ($data['wp_retarger_pixel']);
@@ -27,7 +38,9 @@ class Retarger
           'post_status'   => 'publish',
           'post_name'     => $data['name_router'],
           'post_type'     => 'page',
-          'page_template' => 'empty.php'
+          'page_template' => 'empty.php',
+          'type' => $data['popup-type'],
+          'popup' => $popup
         );
 
         // Insert the post into the database

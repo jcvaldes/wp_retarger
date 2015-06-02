@@ -1,3 +1,4 @@
+
 <div class="wrap">
 
 	<div id="icon-options-general" class="icon32"></div>
@@ -34,7 +35,6 @@
 								</h3>
 								<!-- Nav tabs -->
 								<form name="wp_retarger_form" method="post" action="?page=wp_retarger" enctype="multipart/form-data">
-
 
 
 									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_0'>
@@ -78,39 +78,55 @@
 										</tbody>
 
 									</table>
-									<table class="form-table nav-tab-contents"
-										id='avp_unicode_charkbd_admin_menu_panel_2'
-										style='display: none;'>
+									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_2' style='display: none;'>
 
 
 										<tbody>
 											<tr valign="top" class="even">
-												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" /><div class="pt-10"/><input type="radio" name="popup-type"  value="1"><strong>Type 1</strong></td>
-												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" /><div class="pt-10"/><input type="radio" name="popup-type"  value="1"><strong>Type 2</strong></td>
-												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" /><div class="pt-10"/><input type="radio" name="popup-type"  value="1"><strong>Type 3</strong></td>
-											</tr>
-											<tr>
-											<td colspan="3">
-											 <strong>Popup Type 1: </strong>
-											 Por Url: <input type="radio" name="popup-type1"  value="1">
-											 Por HTML: <input type="radio" name="popup-type1"  value="2">
-											</td>
-											</tr>
-
-											<tr>
-											<td colspan="3">
-											 <strong>Dimensiones: </strong>
-											 Ancho: <input type="text" name="popup-width"  value="800" maxlength="4"  style="width:50px">px
-											 Alto: <input type="text" name="popup-height"  value="600" maxlength="4" style="width:50px">px
-											</td>
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" />
+													<div class="pt-10" />
+													<input type="radio" class="popup-type" name="popup-type" value="1" checked><strong>Type 1</strong></td>
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" />
+													<div class="pt-10" />
+													<input type="radio" class="popup-type" name="popup-type" value="2"><strong>Type 2</strong></td>
+												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" />
+													<div class="pt-10" />
+													<input type="radio" class="popup-type" name="popup-type" value="3"><strong>Type 3</strong></td>
 											</tr>
 
-										    <tr>
-											<td colspan="3">
-											 <strong>URL: </strong>
-											 <input type="text" name="url-popup"  maxlength="255"  style="width:500px">
-											</td>
+											<tr class="for-type-2">
+												<td colspan="3">
+													<strong>Dimensiones: </strong> Ancho:
+													<input type="text" name="popup-width" value="800" maxlength="4" style="width:50px">px Alto:
+													<input type="text" name="popup-height" value="600" maxlength="4" style="width:50px">px
+												</td>
 											</tr>
+
+											<tr class="for-type-2">
+												<td colspan="3">
+													<strong>Popup Type: </strong>
+													Por Url: <input type="radio" class="popup-show" name="popup-show" value="url" checked>
+													Por HTML: <input type="radio" class="popup-show" name="popup-show" value="html">
+												</td>
+											</tr>
+
+
+
+											<tr class="for-type-2">
+												<td colspan="3" class="for-url">
+													<strong>URL: </strong>
+													<input type="text" name="url-popup" maxlength="255" style="width:500px">
+												</td>
+
+												<td colspan="3" class="hide for-html">
+													<strong>Codigo: </strong>
+													<br>
+													<textarea name="html-popup" style="width:80%;height:100px"></textarea>
+												</td>
+											</tr>
+
+
+
 
 										</tbody>
 
@@ -121,7 +137,10 @@
 										<tbody>
 											<tr valign="top" class="even">
 												<td>
-													<textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80"><?= $edit['pixel'] ?></textarea></td>
+													<textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80">
+														<?= $edit[ 'pixel'] ?>
+													</textarea>
+												</td>
 											</tr>
 										</tbody>
 
@@ -129,11 +148,11 @@
 									<p>
 										<input class="button-primary" type="submit" name="wp_retarger_username_submit" value="Guardar" />
 									</p>
-									<?php if(isset($edit['ID'])){ ?>
-											<input type="hidden" name="action" value="update">
-											<input type="hidden" name="id" value="<?= $edit['ID'] ?>">
+									<?php if(isset($edit[ 'ID'])){ ?>
+									<input type="hidden" name="action" value="update">
+									<input type="hidden" name="id" value="<?= $edit['ID'] ?>">
 									<?php } else { ?>
-											<input type="hidden" name="action" value="create">
+									<input type="hidden" name="action" value="create">
 									<?php } ?>
 								</form>
 
@@ -160,10 +179,7 @@
 					<div class="postbox">
 
 						<h3>
-							<span><?php
-
-    esc_attr_e('Sidebar Content Header', 'wp_admin_style');
-    ?></span>
+							<span><?php esc_attr_e('Sidebar Content Header', 'wp_admin_style'); ?></span>
 						</h3>
 
 						<div class="inside">
