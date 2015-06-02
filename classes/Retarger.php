@@ -17,6 +17,7 @@ class Retarger
     public function store($data){
         /* TYPE */
         $popup = [];
+        $modal = '';
         if($data['popup-type'] == 2){
             $popup = [  'width' => $data['popup-width'],
                         'height' => $data['popup-height'],
@@ -24,13 +25,26 @@ class Retarger
                         'url' => $data['url-popup'],
                         'html' => $data['html-popup']
             ];
+            $content = '';
+            if($popup['show'] == 'url'){
+                $content = '<iframe src="'.$popup['url'].'" width="100%" height="100%"  scrolling="no" frameborder="0" style="z-index:3;"></iframe>';
+            }else if($popup['show'] == 'html'){
+                $content = "<p>".$popup['html']."</p>";
+            }
+
+
+
+            $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' </div> <script type="text/javascript" charset="utf-8"> $(function() {$(document).ready(function($) {$("#modal").modal(); }); }); </script>';
+
         }
+
+
 
         /* IFRAME */
 
-        $pixel = ($data['wp_retarger_pixel']);
+        $pixel = $data['wp_retarger_pixel'];
 
-        $iframe = '<iframe src="'.$data['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>';
+        $iframe = '<iframe src="'.$data['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>' . $modal;
         /* Create page */
         $page = array(
           'post_title'    => wp_strip_all_tags($data['name_router']),
