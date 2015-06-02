@@ -28,6 +28,14 @@ jQuery(document).ready( function($) {
         }
     });
 
+    if($("#type").val() == 2){
+        $(".two").trigger('click');
+    }
+
+    if($("#type-show").val() == 'html'){
+        $(".html").trigger('click');
+    }
+
 
 });
 

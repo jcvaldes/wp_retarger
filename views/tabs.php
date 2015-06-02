@@ -88,7 +88,7 @@
 													<input type="radio" class="popup-type" name="popup-type" value="1" checked><strong>Type 1</strong></td>
 												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" />
 													<div class="pt-10" />
-													<input type="radio" class="popup-type" name="popup-type" value="2"><strong>Type 2</strong></td>
+													<input type="radio" class="popup-type two" name="popup-type" value="2"><strong>Type 2</strong></td>
 												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" />
 													<div class="pt-10" />
 													<input type="radio" class="popup-type" name="popup-type" value="3"><strong>Type 3</strong></td>
@@ -97,8 +97,8 @@
 											<tr class="for-type-2">
 												<td colspan="3">
 													<strong>Dimensiones: </strong> Ancho:
-													<input type="text" name="popup-width" value="800" maxlength="4" style="width:50px">px Alto:
-													<input type="text" name="popup-height" value="600" maxlength="4" style="width:50px">px
+													<input type="text" name="popup-width" value="<?php echo (isset($edit['popup']['width'])) ? $edit['popup']['width'] : '800'  ?>" maxlength="4" style="width:50px">px Alto:
+													<input type="text" name="popup-height" value="<?php echo (isset($edit['popup']['height'])) ? $edit['popup']['height'] : '600'  ?>" maxlength="4" style="width:50px">px
 												</td>
 											</tr>
 
@@ -106,7 +106,7 @@
 												<td colspan="3">
 													<strong>Popup Type: </strong>
 													Por Url: <input type="radio" class="popup-show" name="popup-show" value="url" checked>
-													Por HTML: <input type="radio" class="popup-show" name="popup-show" value="html">
+													Por HTML: <input type="radio" class="popup-show html" name="popup-show" value="html">
 												</td>
 											</tr>
 
@@ -115,13 +115,13 @@
 											<tr class="for-type-2">
 												<td colspan="3" class="for-url">
 													<strong>URL: </strong>
-													<input type="text" name="url-popup" maxlength="255" style="width:500px">
+													<input type="text" name="url-popup" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['url'])) ? $edit['popup']['url'] : ''  ?>">
 												</td>
 
 												<td colspan="3" class="hide for-html">
 													<strong>Codigo: </strong>
 													<br>
-													<textarea name="html-popup" style="width:80%;height:100px"></textarea>
+													<textarea name="html-popup" style="width:80%;height:100px"><?php echo (isset($edit['popup']['html'])) ? $edit['popup']['html'] : ''  ?></textarea>
 												</td>
 											</tr>
 
@@ -148,9 +148,11 @@
 									<p>
 										<input class="button-primary" type="submit" name="wp_retarger_username_submit" value="Guardar" />
 									</p>
-									<?php if(isset($edit[ 'ID'])){ ?>
+									<?php if(isset($edit[ 'ID'])){  ?>
 									<input type="hidden" name="action" value="update">
 									<input type="hidden" name="id" value="<?= $edit['ID'] ?>">
+									<input type="hidden" id="type" value="<?= $edit['type'] ?>">
+									<input type="hidden" id="type-show" value="<?= $edit['popup']['show'] ?>">
 									<?php } else { ?>
 									<input type="hidden" name="action" value="create">
 									<?php } ?>

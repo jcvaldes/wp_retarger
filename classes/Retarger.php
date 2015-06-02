@@ -52,9 +52,7 @@ class Retarger
           'post_status'   => 'publish',
           'post_name'     => $data['name_router'],
           'post_type'     => 'page',
-          'page_template' => 'empty.php',
-          'type' => $data['popup-type'],
-          'popup' => $popup
+          'page_template' => 'empty.php'
         );
 
         // Insert the post into the database
@@ -68,7 +66,9 @@ class Retarger
             'name_router' => esc_html($data['name_router']),
             'urlembed_router' => esc_html($data['urlembed_router']),
             'pixel' => ($data['wp_retarger_pixel']),
-            'post_id' => $post_id
+            'post_id' => $post_id,
+            'type' => $data['popup-type'],
+            'popup' => $popup
         );
 
         array_push($this->items, $aux);
