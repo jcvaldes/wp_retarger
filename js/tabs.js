@@ -36,7 +36,6 @@ jQuery(document).ready( function($) {
         $(".html").trigger('click');
     }
 
-
 });
 
 function switch_tabs(obj)

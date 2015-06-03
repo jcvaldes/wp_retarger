@@ -99,3 +99,14 @@ function wp_retarger_enqueue_styles()
 }
 
 add_action('admin_head', 'wp_retarger_enqueue_styles');
+/* AJAX */
+add_action( 'wp_ajax_counter', 'prefix_ajax_counter' );
+add_action( 'wp_ajax_nopriv_counter', 'prefix_ajax_counter' );
+
+function prefix_ajax_counter() {
+    global $retarger;
+
+    $id = $_REQUEST['router_id'];
+
+    return $retarger->counter($id);
+}

@@ -18,6 +18,8 @@ class Retarger
         /* TYPE */
         $popup = [];
         $modal = '';
+        $router_id = uniqid();
+
         if($data['popup-type'] == 2){
             $popup = [  'width' => $data['popup-width'],
                         'height' => $data['popup-height'],
@@ -34,7 +36,7 @@ class Retarger
 
 
 
-            $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' </div> <script type="text/javascript" charset="utf-8"> $(function() {$(document).ready(function($) {$("#modal").modal(); }); }); </script>';
+            $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' <input type="hidden" id="router_id" value="'.$router_id.'">';
 
         }
 
@@ -62,11 +64,12 @@ class Retarger
         $url_filename = $uploader->write();
 
         $aux = array(
-            'ID' => uniqid(),
+            'ID' => $router_id,
             'name_router' => esc_html($data['name_router']),
             'urlembed_router' => esc_html($data['urlembed_router']),
             'pixel' => ($data['wp_retarger_pixel']),
             'post_id' => $post_id,
+            'visits' => 0,
             'type' => $data['popup-type'],
             'popup' => $popup
         );
@@ -115,6 +118,12 @@ class Retarger
     public function save(){
         $this->table = new RoutersTable($this->items);
         return update_option('wp_retarger', $this->items);
+    }
+
+    public function counter($id){
+        $key = $this->find($id);
+        $this->items[$key]['visits'] = ($this->items[$key]['visits'] + 1);
+        $this->save();
     }
 }
 

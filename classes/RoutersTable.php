@@ -51,6 +51,7 @@ class RoutersTable extends WP_List_Table
         switch ($column_name) {
             case 'name_router':
             case 'urlembed_router':
+            case 'visits' :
 //            case 'isbn':
                 return $item[$column_name];
             default:
@@ -78,7 +79,8 @@ class RoutersTable extends WP_List_Table
         $columns = array(
             'cb' => '<input type="checkbox" />',
             'name_router' => __('Name', 'mylisttable'),
-            'urlembed_router' => __('Url', 'mylisttable')
+            'urlembed_router' => __('Url', 'mylisttable'),
+            'visits' => __('Visits', 'mylisttable')
         );
         return $columns;
     }

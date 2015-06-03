@@ -223,4 +223,22 @@
     event.preventDefault();
     $(this).modal();
   });
+
+
+  $(document).on('ready', function($) {
+      setTimeout(function(){jQuery("#modal").modal();}, 3000);
+
+      var data = {
+        'action': 'counter',
+        'router_id': jQuery('#router_id').val()
+      };
+
+      // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+      jQuery.post('/wordpress/wp-admin/admin-ajax.php', data, function(response) {
+        //alert('Got this from the server: ' + response);
+      });
+
+  });
+
+
 })(jQuery);
