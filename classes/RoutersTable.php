@@ -14,14 +14,6 @@ class RoutersTable extends WP_List_Table
     {
         global $status, $page;
 
-        parent::__construct(array(
-            'singular' => __('router', 'mylisttable'), // singular name of the listed records
-            'plural' => __('routers', 'mylisttable'), // plural name of the listed records
-            'ajax' => false
-        ) // does this table support ajax?
-
-        );
-
         $this->example_data = $example_data;
         add_action('admin_head', array(
             &$this,
