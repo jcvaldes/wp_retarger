@@ -104,7 +104,7 @@ class Retarger
     /* Helpers */
 
     public function getAll(){
-        return (get_option('wp_retarger')) ? get_option('wp_retarger') : [];
+        return get_option('wp_retarger', array());
     }
 
     public function find($id){
