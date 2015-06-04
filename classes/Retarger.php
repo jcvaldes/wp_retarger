@@ -15,6 +15,7 @@ class Retarger
     }
 
     public function store($data){
+
         /* TYPE */
         $popup = [];
         $modal = '';
@@ -37,6 +38,20 @@ class Retarger
 
 
             $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' <input type="hidden" id="router_id" value="'.$router_id.'">';
+
+        }else if($data['popup-type'] == 3){
+            $popup = [  'position' => $data['position'],
+                        'click' => !!$data['image-click'],
+                        'image-click-url' => $data['image-click-url'],
+                        'message' => $data['message'],
+                        'button' => [
+                                'text' => $data['button-text'],
+                                'url' => $data['button-url'],
+                                'background' => $data['button-background'],
+                                'color' => $data['button-color'],
+
+                        ]
+            ];
 
         }
 
@@ -76,6 +91,10 @@ class Retarger
 
         array_push($this->items, $aux);
         $this->save();
+
+        //var_dump($this->items); exit;
+
+
     }
 
     public function update($data){
@@ -95,6 +114,9 @@ class Retarger
 
     public function delete($id){
         $key = $this->find($id);
+
+        if(!$key)
+            return false;
 
         wp_delete_post($this->items[$key]['post_id']);
         array_splice($this->items, $key, 1);

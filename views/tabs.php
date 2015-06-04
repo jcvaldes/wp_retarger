@@ -128,6 +128,54 @@
 
 
 
+
+
+											<tr class="for-type-3">
+												<td colspan="3">
+													<strong>Position: </strong>
+													Bottom: <input type="radio" name="position" value="bottom" checked>
+													Top: <input type="radio" name="position" value="top" >
+												</td>
+											</tr>
+
+
+
+											<tr class="for-type-3">
+												<td colspan="3" class="for-url">
+													<strong>Image click? : </strong>
+													Yes: <input type="radio" name="image-click" class="image-click" value="1" checked>
+													No: <input type="radio" name="image-click" class="image-click" value="0" >
+													<br>
+													<div class="for-click-true">
+													<strong>URL: </strong> <input type="text" name="image-click-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['url'])) ? $edit['popup']['url'] : ''  ?>">
+													</div>
+
+												</td>
+
+
+											</tr>
+
+											<tr class="for-type-3">
+												<td colspan="3" class="for-html">
+													<strong>Message: </strong>
+													<br>
+													<textarea name="message" style="width:100%;height:50px"><?php echo (isset($edit['popup']['html'])) ? $edit['popup']['html'] : ''  ?></textarea>
+												</td>
+											</tr>
+
+
+											<tr class="for-type-3">
+												<td colspan="3" class="for-url">
+													<strong>Button: </strong>
+													<br>Text: <input type="text" name="button-text" maxlength="255" style="width:500px" value="">
+													<br>URL: <input type="text" name="button-url" maxlength="255" style="width:500px" value="">
+													<br>Background color: <input type="text" name="button-background" maxlength="255" style="width:500px" value="">
+													<br>Text color: <input type="text" name="button-color" maxlength="255" style="width:500px" value="">
+												</td>
+											</tr>
+
+
+
 										</tbody>
 
 									</table>

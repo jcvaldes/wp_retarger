@@ -10,7 +10,8 @@
 }
 
 
-.for-type-2{
+.for-type-2,
+.for-type-3{
     display:none;
 }
 .hide{

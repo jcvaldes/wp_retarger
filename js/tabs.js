@@ -14,6 +14,7 @@ jQuery(document).ready( function($) {
             $(".for-type-2").show();
         }else if(index == 3){
             $(".for-type-2").hide();
+            $(".for-type-3").show();
         }
     });
 
@@ -27,6 +28,19 @@ jQuery(document).ready( function($) {
             $(".for-html").show();
         }
     });
+
+
+    jQuery(".image-click").click(function(){
+
+        var index = jQuery(this).val();
+        if(index == 1){
+            $(".for-click-true").show();
+        }else if(index == 0){
+            $(".for-click-true").hide();
+        }
+    });
+
+
 
     if($("#type").val() == 2){
         $(".two").trigger('click');
