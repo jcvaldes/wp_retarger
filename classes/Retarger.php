@@ -43,7 +43,8 @@ class Retarger
             $popup = [  'position' => $data['position'],
                         'click' => !!$data['image-click'],
                         'image-click-url' => $data['image-click-url'],
-                        'message' => $data['message'],
+                        'title' => $data['title'],
+                        'description' => $data['description'],
                         'button' => [
                                 'text' => $data['button-text'],
                                 'url' => $data['button-url'],
@@ -52,6 +53,12 @@ class Retarger
 
                         ]
             ];
+
+            $assets = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />';
+
+            $modal = $assets . '<div class="modal" id="modal" style="display:none;width:600px;"  data-position="'.$data['position'].'"> <table width="100%"> <tr> <td width="100"><img src="https://en.opensuse.org/images/0/0b/Icon-user.png" alt="" id="p3-image"></1td> <td valign="top"> <p id="p3-title">'.$data['title'].'</p> <br> <p id="p3-description">'.$data['description'].'</p> </td> <td valign="bottom" align="center"> <a id="p3-button" style="color:'.$data['button-color'].';background-color:'.$data['button-background'].'" href="'.$data['button-url'].'">'.$data['button-text'].'</a> </td> </tr> </table> </div>';
+
+           /* */
 
         }
 
@@ -93,8 +100,6 @@ class Retarger
         $this->save();
 
         //var_dump($this->items); exit;
-
-
     }
 
     public function update($data){

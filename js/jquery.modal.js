@@ -109,7 +109,18 @@
         this.$elm.append(this.closeButton);
       }
       this.$elm.addClass(this.options.modalClass + ' current');
-      this.center();
+
+      var p = this.$elm.data('position');
+
+      if(p == "top"){
+        this.top();
+      }else if(p == "bottom"){
+        this.bottom();
+      }else{
+        this.center();
+      }
+
+
       if(this.options.doFade) {
         this.$elm.fadeIn(this.options.fadeDuration);
       } else {
@@ -154,6 +165,31 @@
       });
     },
 
+    top: function() {
+      var left = (parseInt(this.$elm.css('width')) / 2) + 50;
+      this.$elm.css({
+        position: 'fixed',
+        top: "100px",
+        left: left + "px",
+        marginTop: - (this.$elm.outerHeight() / 2),
+        marginLeft: - (this.$elm.outerWidth() / 2),
+        zIndex: this.options.zIndex + 1
+      });
+    },
+
+    bottom: function() {
+      var left = (parseInt(this.$elm.css('width')) / 2) + 50;
+      this.$elm.css({
+        position: 'fixed',
+        top: "auto",
+        bottom: "100px",
+        left: left + "px",
+        marginBottom: - (this.$elm.outerHeight() / 2),
+        marginLeft: - (this.$elm.outerWidth() / 2),
+        zIndex: this.options.zIndex + 1
+      });
+    },
+
     //Return context for custom events
     _ctx: function() {
       return { elm: this.$elm, blocker: this.blocker, options: this.options };
@@ -161,7 +197,7 @@
   };
 
   //resize is alias for center for now
-  $.modal.prototype.resize = $.modal.prototype.center;
+  $.modal.prototype.resize = $.modal.prototype.top;
 
   $.modal.close = function(event) {
     if (!current) return;
@@ -224,8 +260,7 @@
     $(this).modal();
   });
 
-
-  $(document).on('ready', function($) {
+   $(document).on('ready', function($) {
       setTimeout(function(){jQuery("#modal").modal();}, 3000);
 
       var data = {
@@ -239,6 +274,5 @@
       });
 
   });
-
 
 })(jQuery);

@@ -91,7 +91,7 @@
 													<input type="radio" class="popup-type two" name="popup-type" value="2"><strong>Type 2</strong></td>
 												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" />
 													<div class="pt-10" />
-													<input type="radio" class="popup-type" name="popup-type" value="3"><strong>Type 3</strong></td>
+													<input type="radio" class="popup-type tres" name="popup-type" value="3"><strong>Type 3</strong></td>
 											</tr>
 
 											<tr class="for-type-2">
@@ -134,7 +134,7 @@
 												<td colspan="3">
 													<strong>Position: </strong>
 													Bottom: <input type="radio" name="position" value="bottom" checked>
-													Top: <input type="radio" name="position" value="top" >
+													Top: <input type="radio" name="position" value="top"  <?php echo ($edit['popup']['position'] == 'top') ? 'checked' : ''  ?>>
 												</td>
 											</tr>
 
@@ -144,10 +144,10 @@
 												<td colspan="3" class="for-url">
 													<strong>Image click? : </strong>
 													Yes: <input type="radio" name="image-click" class="image-click" value="1" checked>
-													No: <input type="radio" name="image-click" class="image-click" value="0" >
+													No: <input type="radio" name="image-click" class="image-click" value="0" <?php echo ($edit['popup']['click'] == false) ? 'checked' : ''  ?>>
 													<br>
 													<div class="for-click-true">
-													<strong>URL: </strong> <input type="text" name="image-click-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['url'])) ? $edit['popup']['url'] : ''  ?>">
+													<strong>URL: </strong> <input type="text" name="image-click-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['image-click-url'])) ? $edit['popup']['image-click-url'] : ''  ?>">
 													</div>
 
 												</td>
@@ -156,10 +156,17 @@
 											</tr>
 
 											<tr class="for-type-3">
-												<td colspan="3" class="for-html">
-													<strong>Message: </strong>
+												<td colspan="3">
+													<strong>Title: </strong>
+													<input type="text" name="title" style="width:500px" value="<?php echo (isset($edit['popup']['title'])) ? $edit['popup']['title'] : ''  ?>">
+												</td>
+											</tr>
+
+											<tr class="for-type-3">
+												<td colspan="3" >
+													<strong>Description: </strong>
 													<br>
-													<textarea name="message" style="width:100%;height:50px"><?php echo (isset($edit['popup']['html'])) ? $edit['popup']['html'] : ''  ?></textarea>
+													<textarea name="description" style="width:100%;height:50px"><?php echo (isset($edit['popup']['description'])) ? $edit['popup']['description'] : ''  ?></textarea>
 												</td>
 											</tr>
 
@@ -167,10 +174,10 @@
 											<tr class="for-type-3">
 												<td colspan="3" class="for-url">
 													<strong>Button: </strong>
-													<br>Text: <input type="text" name="button-text" maxlength="255" style="width:500px" value="">
-													<br>URL: <input type="text" name="button-url" maxlength="255" style="width:500px" value="">
-													<br>Background color: <input type="text" name="button-background" maxlength="255" style="width:500px" value="">
-													<br>Text color: <input type="text" name="button-color" maxlength="255" style="width:500px" value="">
+													<br>Text: <input type="text" name="button-text" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
+													<br>URL: <input type="text" name="button-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['url'])) ? $edit['popup']['button']['url'] : ''  ?>">
+													<br>Background color: <input type="text" name="button-background" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
+													<br>Text color: <input type="text" name="button-color" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
 												</td>
 											</tr>
 

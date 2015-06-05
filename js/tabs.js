@@ -44,6 +44,8 @@ jQuery(document).ready( function($) {
 
     if($("#type").val() == 2){
         $(".two").trigger('click');
+    }else if($("#type").val() == 3){
+        $(".tres").trigger('click');
     }
 
     if($("#type-show").val() == 'html'){
