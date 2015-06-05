@@ -70,7 +70,7 @@
 											<tr valign="top" class="odd">
 												<td><strong>Description</strong></td>
 												<td>
-													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%" />
+													<input type="text" id="url_image_redirect_description" name="url_image_redirect_description" style="width: 50%" />
 												</td>
 											</tr>
 

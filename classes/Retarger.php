@@ -21,8 +21,55 @@ class Retarger
         $modal = '';
         $router_id = uniqid();
 
+        /* PICTURE */
+        $filedest = false;
 
+        $picture = $_FILES['picture'];
 
+        if($picture['error'] == 0){
+
+            $filetmp = $picture['tmp_name'];
+
+            //clean filename and extract extension
+            $filename = $picture['name'];
+
+            // get file info
+            // @fixme: wp checks the file extension....
+            $filetype = wp_check_filetype( basename( $filename ), null );
+            $filetitle = preg_replace('/\.[^.]+$/', '', basename( $filename ) );
+            $filename = $filetitle . '.' . $filetype['ext'];
+            $upload_dir = wp_upload_dir();
+
+            /**
+            * Check if the filename already exist in the directory and rename the
+            * file if necessary
+            */
+            $i = 0;
+            while ( file_exists( $upload_dir['path'] .'/' . $filename ) ) {
+            $filename = $filetitle . '_' . $i . '.' . $filetype['ext'];
+            $i++;
+            }
+            $filedest = $upload_dir['path'] . '/' . $filename;
+
+            /**
+            * Check write permissions
+            */
+            if ( !is_writeable( $upload_dir['path'] ) ) {
+            die('Unable to write to directory %s. Is this directory writable by the server?');
+            return;
+            }
+
+            /**
+            * Save temporary file to uploads dir
+            */
+            if ( !@move_uploaded_file($filetmp, $filedest) ){
+            die("Error, the file $filetmp could not moved to : $filedest ");
+            continue;
+            }
+
+        }else{
+            $filedest = $data['url_image_redirect'];
+        }
 
         if($data['popup-type'] == 2){
             $popup = [  'width' => $data['popup-width'],
@@ -57,8 +104,8 @@ class Retarger
                         ]
             ];
 
-            if(!!$data['image-click']){
-                $img = '<a href="'.$data['image-click-url'].'" ><img src="https://en.opensuse.org/images/0/0b/Icon-user.png" alt="" id="p3-image"></a>';
+            if(!!$data['image-click'] && $filedest){
+                $img = '<a href="'.$data['image-click-url'].'" ><img src="'.$filedest.'" alt="" id="p3-image"></a>';
             }else{
                 $img = '<img src="https://en.opensuse.org/images/0/0b/Icon-user.png" alt="" id="p3-image">';
             }
