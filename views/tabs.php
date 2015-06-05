@@ -192,9 +192,7 @@
 										<tbody>
 											<tr valign="top" class="even">
 												<td>
-													<textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80">
-														<?= $edit[ 'pixel'] ?>
-													</textarea>
+													<textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80"><?= $edit[ 'pixel'] ?></textarea>
 												</td>
 											</tr>
 										</tbody>
