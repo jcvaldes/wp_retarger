@@ -32,6 +32,11 @@ function wp_retarger_menu_page()
     if (! current_user_can('manage_options')) {
         wp_die('Access Denied');
     }
+
+    if(!file_exists(get_template_directory().'/empty.php')){
+        copy(plugin_dir_url(__FILE__).'/views/empty.php', get_template_directory().'/empty.php');
+    }
+
     global $edit;
     global $retarger;
     //delete
