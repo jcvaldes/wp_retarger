@@ -64,7 +64,7 @@
 												<td><strong>Url Image</strong></td>
 												<td>
 													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%" />
-													<input type="file" name="myfile" id="myfile">
+													<input type="file" name="picture" id="picture">
 												</td>
 											</tr>
 											<tr valign="top" class="odd">
