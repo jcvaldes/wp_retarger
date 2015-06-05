@@ -10,6 +10,7 @@ jQuery(document).ready( function($) {
         var index = jQuery(this).val();
         if(index == 1){
             $(".for-type-2").hide();
+            $(".for-type-3").hide();
         }else if(index == 2){
             $(".for-type-2").show();
         }else if(index == 3){
