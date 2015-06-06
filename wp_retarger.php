@@ -32,10 +32,16 @@ function wp_retarger_menu_page()
     if (! current_user_can('manage_options')) {
         wp_die('Access Denied');
     }
+    /* copy template */
+    $plugin_dir = plugin_dir_path( __FILE__ ) . 'views/retarger.php';
+    $theme_dir = get_template_directory() . '/retarger.php';
 
-    if(!file_exists(get_template_directory().'/retarger.php')){
-        copy(plugin_dir_url(__FILE__).'/views/retarger.php', get_template_directory().'/retarger.php');
+    if(!file_exists($theme_dir)){
+        if (!copy($plugin_dir, $theme_dir)) {
+            //echo "failed to copy $plugin_dir to $theme_dir...\n";
+        }
     }
+    /* :copy template */
 
     global $edit;
     global $retarger;

@@ -1,4 +1,4 @@
-<?php /* Template Name: My Custom Page */ ?>
+<?php /* Template Name: Retarger */ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
