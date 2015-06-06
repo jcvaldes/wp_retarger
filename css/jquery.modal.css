@@ -70,6 +70,7 @@ td pre { margin: 0; }
 #p3-title,
 #p3-description{
   margin: 0px;
+  padding: 1em;
 }
 
 #p3-title{
