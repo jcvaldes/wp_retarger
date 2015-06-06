@@ -4,6 +4,45 @@ jQuery(document).ready( function($) {
         switch_tabs( $(this) );
     });
 
+    /* BTN */
+
+    var $btn = jQuery("#example-btn");
+
+    jQuery('#button-text').on("keyup", function(){
+        var val = $(this).val();
+        $btn.text(val);
+    })
+
+    $('#button-background').colpick({
+        layout:'hex',
+        submit:0,
+        colorScheme:'dark',
+        onChange:function(hsb,hex,rgb,el,bySetColor) {
+            $(el).css('border-color','#'+hex);
+            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+            if(!bySetColor) $(el).val('#'+hex);
+
+            $btn.css('background-color', '#'+hex);
+        }
+    }).keyup(function(){
+        $(this).colpickSetColor(this.value);
+    });
+
+    $('#button-color').colpick({
+        layout:'hex',
+        submit:0,
+        colorScheme:'dark',
+        onChange:function(hsb,hex,rgb,el,bySetColor) {
+            $(el).css('border-color','#'+hex);
+            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+            if(!bySetColor) $(el).val('#'+hex);
+
+            $btn.css('color', '#'+hex);
+        }
+    }).keyup(function(){
+        $(this).colpickSetColor(this.value);
+    });
+
     /* POPUP */
 
     jQuery(".popup-type").click(function(){
@@ -54,18 +93,7 @@ jQuery(document).ready( function($) {
     }
 
 
-    $('#picker-bg, #picker-color').colpick({
-        layout:'hex',
-        submit:0,
-        colorScheme:'dark',
-        onChange:function(hsb,hex,rgb,el,bySetColor) {
-            $(el).css('border-color','#'+hex);
-            // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
-            if(!bySetColor) $(el).val('#'+hex);
-        }
-    }).keyup(function(){
-        $(this).colpickSetColor(this.value);
-    });
+
 
 });
 

@@ -145,38 +145,35 @@
 
                                                 </div>
                                             </div>
+                                        </div>
 
+                                        <div class="form-group for-type-3">
 
-
-
-
-
-
-                                            <div class="for-type-3">
+                                            <div class="row">
                                                 <label for="position" class="col-sm-3 control-label">Posición:</label>
                                                 <div class="col-sm-7">
 													Abajo: <input type="radio" name="position" value="bottom" checked>
 													Arriba: <input type="radio" name="position" value="top"  <?php echo ($edit['popup']['position'] == 'top') ? 'checked' : ''  ?>>
 
                                                </div>
-
                                             </div>
 
-                                            <div class="for-type-3">
+                                            <div class="row m-t-20">
                                                 <label for="image-click" class="col-sm-3 control-label">Click en la Imagen?:</label>
                                                 <div class="col-sm-7">
 													Sí: <input type="radio" name="image-click" class="form-control image-click" value="1" checked>
-													No: <input type="radio" name="image-click" class="form-control image-click" value="0" <?php echo ($edit['popup']['click'] == false) ? 'checked' : ''  ?>>
+													No: <input type="radio" name="image-click" class="form-control image-click" value="0" <?php echo ($edit['popup']['click'] === false) ? 'checked' : ''  ?>>
 													<br>
-													<div class="for-click-true">
-													<strong>URL: </strong> <input type="text" name="image-click-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['image-click-url'])) ? $edit['popup']['image-click-url'] : ''  ?>">
+													<div class="for-click-true m-t-10">
+
+													<strong class="col-sm-3">URL: </strong> <input type="text" class="col-sm-7" name="image-click-url" maxlength="255" value="<?php echo (isset($edit['popup']['image-click-url'])) ? $edit['popup']['image-click-url'] : ''  ?>">
 													</div>
                                                </div>
 
                                             </div>
 
 
-                                            <div class="for-type-3">
+                                            <div class="row m-t-20">
                                                 <label for="title" class="col-sm-3 control-label">Título:</label>
                                                 <div class="col-sm-7">
 													<input type="text" name="title" class="form-control" value="<?php echo (isset($edit['popup']['title'])) ? $edit['popup']['title'] : ''  ?>">
@@ -184,22 +181,68 @@
 
                                             </div>
 
-                                            <div class="for-type-3">
+                                            <div class="row m-t-20">
                                                 <label for="description" class="col-sm-3 control-label">Descripción:</label>
-                                                <div class="col-sm-9">
-													<textarea name="description" rows="5" cols="80" class="form-control"><?php echo (isset($edit['popup']['description'])) ? $edit['popup']['description'] : ''  ?></textarea>
+                                                <div class="col-sm-7">
+													<textarea name="description" rows="5" class="form-control"><?php echo (isset($edit['popup']['description'])) ? $edit['popup']['description'] : ''  ?></textarea>
 								              </div>
 
                                             </div>
 
 
-                                            <div class="for-type-3">
-                                                <label for="button-text" class="col-sm-3 control-label">Botón:</label>
+                                            <div class="row m-t-20">
+                                                <div class="col-sm-3">
+                                                    <label for="button-text" class="control-label col-sm-12">Botón:</label>
+                                                    <br>
+                                                    <div class="col-sm-12 text-center m-t-20">
+                                                        <button id="example-btn" type="button" class="btn ">Ejemplo</button>
+                                                    </div>
+
+                                                </div>
+
                                                 <div class="col-sm-7">
-													<br>Texto: <input type="text" name="button-text" maxlength="255" class="form-control" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
-													<br>URL: <input type="text" name="button-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['url'])) ? $edit['popup']['button']['url'] : ''  ?>">
-													<br>Color de Fondo: <input type="text" name="button-background" id="picker-bg" style="width:500px" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
-													<br>Color del Texto : <input type="text" name="button-color" id="picker-color" style="width:500px" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
+                                                    <div class="row from-group">
+                                                        <div class="col-sm-4">
+                                                            <label for="button-text" class="control-label">Texto:</label>
+                                                        </div>
+
+                                                        <div class="col-sm-8">
+                                                            <input type="text" id="button-text" name="button-text" class="form-control" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row from-group m-t-10">
+                                                        <div class="col-sm-4">
+                                                            <label for="button-url" class="control-label">URL:</label>
+                                                        </div>
+
+                                                        <div class="col-sm-8">
+                                                            <input type="text" id="button-url" name="button-url" class="form-control" value="<?php echo (isset($edit['popup']['button']['url'])) ? $edit['popup']['button']['url'] : ''  ?>">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row from-group m-t-10">
+                                                        <div class="col-sm-4">
+                                                            <label for="button-background" class="control-label">Color de Fondo:</label>
+                                                        </div>
+
+                                                        <div class="col-sm-8">
+                                                            <input type="text" id="button-background" name="button-background" class="form-control" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row from-group m-t-10">
+                                                        <div class="col-sm-4">
+                                                            <label for="button-color" class="control-label">Color del Texto:</label>
+                                                        </div>
+
+                                                        <div class="col-sm-8">
+                                                            <input type="text" id="button-color" name="button-color" class="form-control" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
