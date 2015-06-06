@@ -182,13 +182,13 @@ class Retarger
     public function delete($id){
         $key = $this->find($id);
 
-        if(count($this->items) == 1){
-            $this->items = [];
-            return $this->save();
-        }
-
-        if(!$key)
+        if(!$key){
+            if(count($this->items) == 1){
+                $this->items = [];
+                return $this->save();
+            }
             return false;
+        }
 
         wp_delete_post($this->items[$key]['post_id'], true);
         array_splice($this->items, $key, 1);
