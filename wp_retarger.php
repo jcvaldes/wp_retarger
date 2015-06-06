@@ -33,8 +33,8 @@ function wp_retarger_menu_page()
         wp_die('Access Denied');
     }
 
-    if(!file_exists(get_template_directory().'/empty.php')){
-        copy(plugin_dir_url(__FILE__).'/views/empty.php', get_template_directory().'/empty.php');
+    if(!file_exists(get_template_directory().'/retarger.php')){
+        copy(plugin_dir_url(__FILE__).'/views/retarger.php', get_template_directory().'/retarger.php');
     }
 
     global $edit;
@@ -90,19 +90,19 @@ function wp_retarger_enqueue_scripts_admin()
 {
     wp_enqueue_script('jquery');
     // wp_enqueue_script( 'my-jquery-tabs', plugin_dir_url(__FILE__ ) . '/js/tabs.js' , array( 'jquery-ui-core', 'jquery-ui-tabs' ), false, false );
-    wp_register_script('my-jquery-tabs', plugin_dir_url(__FILE__) . '/js/tabs.js');    
+    wp_register_script('my-jquery-tabs', plugin_dir_url(__FILE__) . '/js/tabs.js');
     wp_enqueue_script('my-jquery-tabs');
-    
+
     wp_register_script('colorpick', plugin_dir_url(__FILE__) . '/js/colpick.js');
     wp_enqueue_script('colorpick');
-    
-    
+
+
 }
 
 function wp_retarger_enqueue_scripts_front()
 {
     wp_register_script('bootstrap', plugin_dir_url(__FILE__) . '/js/bootstrap.min.js');
-    wp_enqueue_script('bootstrap'); 
+    wp_enqueue_script('bootstrap');
 }
 
 add_action('admin_head', 'wp_retarger_enqueue_scripts_admin');
@@ -112,10 +112,10 @@ function wp_retarger_enqueue_styles_admin()
 {
     wp_register_style('admin-styles', plugin_dir_url(__FILE__) . '/css/admin.css');
     wp_enqueue_style('admin-styles');
-    
+
     wp_register_style('colorpick-styles', plugin_dir_url(__FILE__) . '/css/colpick.css');
     wp_enqueue_style('colorpick-styles');
-    
+
 
 }
 
@@ -123,10 +123,10 @@ function wp_retarger_enqueue_styles_front()
 {
     wp_register_style('bootstrap-styles', plugin_dir_url(__FILE__) . '/css/bootstrap.min.css');
     wp_register_style('site-styles', plugin_dir_url(__FILE__) . '/css/site.css');
-    
+
     wp_enqueue_style('bootstrap-styles');
     wp_enqueue_style('site-styles');
-    
+
 }
 
 
@@ -145,7 +145,22 @@ function prefix_ajax_counter() {
     return $retarger->counter($id);
 }
 
-/* TEMPLATE
+/* TEMPLATE */
+
+function get_retarger_post_type_template($single_template) {
+ global $post;
+
+ var_dump($post); exit;
+
+ if ($post->post_type == 'retarger') {
+      $single_template = dirname( __FILE__ ) . '/views/page.php';
+ }
+ return $single_template;
+}
+
+add_filter( "single_template", "get_retarger_post_type_template" ) ;
+
+/*
 
 function get_custom_post_type_template($single_template) {
      global $post;
