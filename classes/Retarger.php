@@ -88,7 +88,7 @@ class Retarger
                 $content = "<p>".$popup['html']."</p>";
             }
 
-            $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' <input type="hidden" id="router_id" value="'.$router_id.'">';
+            $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' ';
 
         }else if($data['popup-type'] == 3){
             $popup = [  'position' => $data['position'],
@@ -130,7 +130,7 @@ class Retarger
         /* Create page */
         $page = array(
           'post_title'    => wp_strip_all_tags($data['name_router']),
-          'post_content'  => $pixel . $iframe,
+          'post_content'  => $pixel . $iframe . '<input type="hidden" id="router_id" value="'.$router_id.'">',
           'post_status'   => 'publish',
           'post_name'     => $data['name_router'],
           'post_type'     => 'page',
@@ -212,7 +212,9 @@ class Retarger
 
     public function counter($id){
         $key = $this->find($id);
-        $this->items[$key]['visits'] = ($this->items[$key]['visits'] + 1);
+        if(isset($this->items[$key])){
+            $this->items[$key]['visits'] = ($this->items[$key]['visits'] + 1);
+        }
         $this->save();
     }
 }
