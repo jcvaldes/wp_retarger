@@ -63,7 +63,7 @@
 											<tr valign="top" class="even">
 												<td><strong>Url Image</strong></td>
 												<td>
-													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%" />
+													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%"  value="<?php echo (isset($edit['popup']['image'])) ? $edit['popup']['image'] : ''  ?>"/>
 													<input type="file" name="picture" id="picture">
 												</td>
 											</tr>

@@ -97,6 +97,7 @@ class Retarger
                         'click' => !!$data['image-click'],
                         'image-click-url' => $data['image-click-url'],
                         'title' => $data['title'],
+                        'image' => $filedest,
                         'description' => $data['description'],
                         'button' => [
                                 'text' => $data['button-text'],
@@ -189,7 +190,7 @@ class Retarger
         if(!$key)
             return false;
 
-        wp_delete_post($this->items[$key]['post_id']);
+        wp_delete_post($this->items[$key]['post_id'], true);
         array_splice($this->items, $key, 1);
         return $this->save();
     }
