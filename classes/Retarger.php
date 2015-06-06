@@ -134,7 +134,7 @@ class Retarger
           'post_status'   => 'publish',
           'post_name'     => $data['name_router'],
           'post_type'     => 'page',
-          'page_template' => 'empty.php'
+          'page_template' => 'retarger.php'
         );
 
         // Insert the post into the database
