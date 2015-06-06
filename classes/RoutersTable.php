@@ -35,7 +35,7 @@ class RoutersTable extends WP_List_Table
 
     function no_items()
     {
-        _e('No routers found, dude.');
+        _e('No se encontraron rutas.');
     }
 
     function column_default($item, $column_name)
@@ -70,9 +70,9 @@ class RoutersTable extends WP_List_Table
     {
         $columns = array(
             'cb' => '<input type="checkbox" />',
-            'name_router' => __('Name', 'mylisttable'),
+            'name_router' => __('Nombre', 'mylisttable'),
             'urlembed_router' => __('Url', 'mylisttable'),
-            'visits' => __('Visits', 'mylisttable')
+            'visits' => __('Visitantes', 'mylisttable')
         );
         return $columns;
     }

@@ -56,7 +56,7 @@ function wp_retarger_menu_page()
 
     /* *** */
 
-    echo '<div class="wrap"><h2>My Routers</h2>';
+    echo '<div class="wrap"><h2>Mis Rutas</h2>';
     $retarger->table->prepare_items();
 
     echo '<form method="post"><input type="hidden" name="page" value="ttest_list_table">';

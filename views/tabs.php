@@ -2,7 +2,7 @@
 <div class="wrap">
 
 	<div id="icon-options-general" class="icon32"></div>
-	<h2><?php esc_attr_e( 'WP Retarger Tools', 'wp_admin_style' ); ?></h2>
+	<h2><?php esc_attr_e( 'Herramientas de Remarketing', 'wp_admin_style' ); ?></h2>
 
 	<div id="poststuff">
 
