@@ -22,7 +22,7 @@ class Retarger
         $router_id = uniqid();
 
         /* PICTURE */
-        $filedest = false;
+        $image = false;
 
         $picture = $_FILES['picture'];
 
@@ -51,6 +51,8 @@ class Retarger
             }
             $filedest = $upload_dir['path'] . '/' . $filename;
 
+            $image = $upload_dir['baseurl'] . '/' . $filename;
+
             /**
             * Check write permissions
             */
@@ -66,12 +68,10 @@ class Retarger
             die("Error, the file $filetmp could not moved to : $filedest ");
             continue;
             }
-            $filedest = str_replace('\\', '/', $filedest);
 
         }else{
-            $filedest = $data['url_image_redirect'];
+            $image = $data['url_image_redirect'];
         }
-
 
 
         if($data['popup-type'] == 2){
@@ -88,8 +88,6 @@ class Retarger
                 $content = "<p>".$popup['html']."</p>";
             }
 
-
-
             $modal = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />  <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' <input type="hidden" id="router_id" value="'.$router_id.'">';
 
         }else if($data['popup-type'] == 3){
@@ -97,7 +95,7 @@ class Retarger
                         'click' => !!$data['image-click'],
                         'image-click-url' => $data['image-click-url'],
                         'title' => $data['title'],
-                        'image' => $filedest,
+                        'image' => $image,
                         'description' => $data['description'],
                         'button' => [
                                 'text' => $data['button-text'],
@@ -108,10 +106,10 @@ class Retarger
                         ]
             ];
 
-            if(!!$data['image-click'] && $filedest){
-                $img = '<a href="'.$data['image-click-url'].'" ><img src="'.$filedest.'" alt="" id="p3-image"></a>';
-            }else if($filedest){
-                $img = '<img src="'.$filedest.'" alt="" id="p3-image">';
+            if(!!$data['image-click'] && $image){
+                $img = '<a href="'.$data['image-click-url'].'" ><img src="'.$image.'" alt="" id="p3-image"></a>';
+            }else if($image){
+                $img = '<img src="'.$image.'" alt="" id="p3-image">';
             }else{
                 $img = '<img src="https://en.opensuse.org/images/0/0b/Icon-user.png" alt="" id="p3-image">';
             }
@@ -123,8 +121,6 @@ class Retarger
            /* */
 
         }
-
-
 
         /* IFRAME */
 
