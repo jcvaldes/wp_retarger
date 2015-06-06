@@ -66,10 +66,13 @@ class Retarger
             die("Error, the file $filetmp could not moved to : $filedest ");
             continue;
             }
+            $filedest = str_replace('\\', '/', $filedest);
 
         }else{
             $filedest = $data['url_image_redirect'];
         }
+
+
 
         if($data['popup-type'] == 2){
             $popup = [  'width' => $data['popup-width'],
@@ -106,6 +109,8 @@ class Retarger
 
             if(!!$data['image-click'] && $filedest){
                 $img = '<a href="'.$data['image-click-url'].'" ><img src="'.$filedest.'" alt="" id="p3-image"></a>';
+            }else if($filedest){
+                $img = '<img src="'.$filedest.'" alt="" id="p3-image">';
             }else{
                 $img = '<img src="https://en.opensuse.org/images/0/0b/Icon-user.png" alt="" id="p3-image">';
             }
