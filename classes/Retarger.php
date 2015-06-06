@@ -181,6 +181,11 @@ class Retarger
     public function delete($id){
         $key = $this->find($id);
 
+        if(count($this->items) == 1){
+            $this->items = [];
+            return $this->save();
+        }
+
         if(!$key)
             return false;
 
