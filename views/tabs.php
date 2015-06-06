@@ -36,11 +36,11 @@
 								<!-- Nav tabs -->
 								<form name="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
 
-								    <div class="nav-tab-contents m-t-20" id='avp_unicode_charkbd_admin_menu_panel_0'>									
+								    <div class="nav-tab-contents m-t-20" id='avp_unicode_charkbd_admin_menu_panel_0'>
                                         <div class="form-group">
                                             <label for="name_router" class="col-sm-3 control-label">Nombre</label>
                                             <div class="col-sm-7">
-                                            	<input type="text" id="name_router" name="name_router" class="form-control" value="<?= $edit['name_router'] ?>" />										
+                                            	<input type="text" id="name_router" name="name_router" class="form-control" value="<?= $edit['name_router'] ?>" />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -49,10 +49,10 @@
                                 				<input type="text" id="urlembed_router" name="urlembed_router" class="form-control" value="<?= $edit['urlembed_router'] ?>" />
 										    </div>
                                         </div>
-                                    </div> 
+                                    </div>
 
                                     <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_1' style='display: none;'>
-                                   
+
                                         <div class="form-group">
                                             <label for="url_image_redirect" class="col-sm-3 control-label">Imagen de la Url</label>
                                             <div class="col-sm-7">
@@ -60,17 +60,17 @@
 												<input type="file" name="picture" id="picture">
 									        </div>
                                         </div>
-                                     
+
                                         <div class="form-group">
                                             <label for="url_image_redirect_description" class="col-sm-3 control-label">Descripción</label>
                                             <div class="col-sm-7">
 											     <input type="text" id="url_image_redirect_description" name="url_image_redirect_description" class="form-control" />
                                             </div>
                                         </div>
-                                     
-                                    </div>									
-                                    
-                                    
+
+                                    </div>
+
+
                                     <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_2' style='display: none;'>
                                         <table class="form-table" >
     										<tbody>
@@ -85,65 +85,84 @@
     													<div class="pt-10" />
     													<input type="radio" class="popup-type tres" name="popup-type" value="3"><strong>Type 3</strong></td>
     											</tr>
-    											
+
     									   </tbody>
     									</table>
-											
-                                        <div class="form-group">
-                                            <div class="for-type-2">
-                                                <label for="popup-width" class="col-sm-3 control-label">Ancho</label>
-                                                
-                                                <div class="col-sm-7">
-    													<input type="text" name="popup-width" class="form-control" value="<?php echo (isset($edit['popup']['width'])) ? $edit['popup']['width'] : '800'  ?>" maxlength="4" style="width:50px">px
-                                                </div>                                            
-                                            </div>
-                                            <div class="for-type-2">
-                                                <label for="popup-height" class="col-sm-3 control-label">Alto</label>
-                                                
-                                                <div class="col-sm-7">
-    										    	<input type="text" name="popup-height" class="form-control" value="<?php echo (isset($edit['popup']['height'])) ? $edit['popup']['height'] : '600'  ?>" maxlength="4" style="width:50px">px
-                                                </div>                                            
-                                            </div>
-                                            
-                                            
-                                            
-                                            <div class="for-type-2">
-                                                <label for="url_image_redirect" class="col-sm-3 control-label">Tipo de Popup:</label>
-                                                <div class="col-sm-7">
-													Por Url: <input type="radio" class="popup-show" name="popup-show" value="url" checked>
-													Por HTML: <input type="radio" class="popup-show html" name="popup-show" value="html">
+
+                                        <div class="form-group for-type-2">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="popup-width" class="col-sm-3 control-label">Ancho</label>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <input name="popup-width" type="text" class="form-control" value="<?php echo (isset($edit['popup']['width'])) ? $edit['popup']['width'] : '800'  ?>" aria-describedby="basic-addon2">
+                                                            <span class="input-group-addon" id="basic-addon2">px</span>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
-                                            
+                                                <div class="col-md-6">
+                                                    <label for="popup-height" class="col-sm-3 control-label">Alto</label>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <input name="popup-height" type="text" class="form-control" value="<?php echo (isset($edit['popup']['width'])) ? $edit['popup']['width'] : '800'  ?>" aria-describedby="basic-addon2">
+                                                            <span class="input-group-addon" id="basic-addon2">px</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                            
-                                            <div class="for-type-2 for-url">
-                                                <label for="url-popup" class="col-sm-3 control-label">URL:</label>
-                                                <div class="col-sm-7">
-													<input type="text" name="url-popup" maxlength="255" class="form-control" value="<?php echo (isset($edit['popup']['url'])) ? $edit['popup']['url'] : ''  ?>">
-                                               </div>
+
+
+                                            <div class="row m-t-20">
+                                                <div class="for-type-2">
+                                                    <label for="url_image_redirect" class="col-sm-3 control-label">Tipo de Popup:</label>
+                                                    <div class="col-sm-7">
+                                                        Por Url: <input type="radio" class="popup-show" name="type-show" value="url" checked>
+                                                        Por HTML: <input type="radio" class="popup-show html" name="type-show" value="html">
+                                                    </div>
+
+                                                </div>
 
                                             </div>
-                    
-                                            <div class="for-type-2 hide for-html">
-                                                <label for="url-popup" class="col-sm-3 control-label">Código:</label>
-                                                <div class="col-sm-9">
-                                                    <textarea name="html-popup" class="form-control" rows=5 cols="80"><?php echo (isset($edit['popup']['html'])) ? $edit['popup']['html'] : ''  ?></textarea>
-				                                </div>
-                                            
+
+                                            <div class="row m-t-20">
+                                                <div class="for-url">
+                                                    <label for="url-popup" class="col-sm-2 control-label">URL:</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" name="url-popup" maxlength="255" class="form-control" value="<?php echo (isset($edit['popup']['url'])) ? $edit['popup']['url'] : ''  ?>">
+                                                   </div>
+
+                                                </div>
+
+                                                <div class="for-html" style="display:none">
+                                                    <label for="url-popup" class="col-sm-2 control-label">Código:</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea name="html-popup" class="form-control" rows=5 cols="80"><?php echo (isset($edit['popup']['html'])) ? $edit['popup']['html'] : ''  ?></textarea>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            
-                                            
+
+
+
+
+
+
+
                                             <div class="for-type-3">
                                                 <label for="position" class="col-sm-3 control-label">Posición:</label>
                                                 <div class="col-sm-7">
 													Abajo: <input type="radio" name="position" value="bottom" checked>
 													Arriba: <input type="radio" name="position" value="top"  <?php echo ($edit['popup']['position'] == 'top') ? 'checked' : ''  ?>>
-									
+
                                                </div>
 
                                             </div>
-                                            
-                                            <div class="for-type-3 for-url">
+
+                                            <div class="for-type-3">
                                                 <label for="image-click" class="col-sm-3 control-label">Click en la Imagen?:</label>
                                                 <div class="col-sm-7">
 													Sí: <input type="radio" name="image-click" class="form-control image-click" value="1" checked>
@@ -164,7 +183,7 @@
                                                </div>
 
                                             </div>
-								
+
                                             <div class="for-type-3">
                                                 <label for="description" class="col-sm-3 control-label">Descripción:</label>
                                                 <div class="col-sm-9">
@@ -173,8 +192,8 @@
 
                                             </div>
 
-								
-                                            <div class="for-type-3 for-url">
+
+                                            <div class="for-type-3">
                                                 <label for="button-text" class="col-sm-3 control-label">Botón:</label>
                                                 <div class="col-sm-7">
 													<br>Texto: <input type="text" name="button-text" maxlength="255" class="form-control" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
@@ -184,22 +203,22 @@
                                                 </div>
 
                                             </div>
-                    					                        
+
                                         </div>
-                            
-					                                        
-                                   </div>  
-							
-					
+
+
+                                   </div>
+
+
 								    <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
-                                   
+
                                         <div class="form-group">
                                             <div class="col-sm-9">
-                       					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80" class="form-control"><?= $edit[ 'pixel'] ?></textarea>							
+                       					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80" class="form-control"><?= $edit[ 'pixel'] ?></textarea>
 									        </div>
                                         </div>
                                      </div>
-                                     
+
 									<p>
 										<input class="btn btn-primary" type="submit" name="wp_retarger_username_submit" value="Guardar" />
 									</p>
@@ -228,7 +247,7 @@
 			</div>
 			<!-- post-body-content -->
 
-	
+
 
 		</div>
 		<!-- #post-body .metabox-holder .columns-2 -->
