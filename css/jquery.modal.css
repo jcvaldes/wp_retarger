@@ -77,9 +77,10 @@ td pre { margin: 0; }
 }
 
 #p3-description{
-  font-size: 24px;
   color:black;
   word-wrap:break-word;
+  font-size: 1em;
+  padding: 0 1em;
 }
 
 #p3-button{

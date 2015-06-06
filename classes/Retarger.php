@@ -112,7 +112,7 @@ class Retarger
 
             $assets = '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript" charset="utf-8"></script><script src="'.plugin_dir_url(__FILE__ ).'../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script> <link rel="stylesheet" href="'.plugin_dir_url(__FILE__ ).'../css/jquery.modal.css" type="text/css" media="screen" />';
 
-            $modal = $assets . '<div class="modal" id="modal" style="display:none;width:600px;"  data-position="'.$data['position'].'"> <table width="100%"> <tr> <td width="100">'.$img.'</td> <td valign="top"> <p id="p3-title">'.$data['title'].'</p> <br> <p id="p3-description">'.$data['description'].'</p> </td> <td valign="bottom" align="center"> <a id="p3-button" style="color:'.$data['button-color'].';background-color:'.$data['button-background'].'" href="'.$data['button-url'].'">'.$data['button-text'].'</a> </td> </tr> </table> </div>';
+            $modal = $assets . '<div class="modal" id="modal" style="display:none;width:600px;"  data-position="'.$data['position'].'"> <table width="100%"> <tr> <td width="100">'.$img.'</td> <td valign="top"> <p id="p3-title">'.$data['title'].'</p> </td> <td valign="bottom" align="center"> <a id="p3-button" style="color:'.$data['button-color'].';background-color:'.$data['button-background'].'" href="'.$data['button-url'].'">'.$data['button-text'].'</a> </td> </tr> <tr><td colspan="3"><p id="p3-description">'.$data['description'].'</p></td></tr></table> </div>';
 
            /* */
 
