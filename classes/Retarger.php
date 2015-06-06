@@ -51,7 +51,7 @@ class Retarger
             }
             $filedest = $upload_dir['path'] . '/' . $filename;
 
-            $image = $upload_dir['baseurl'] . '/' . $filename;
+            $image = $upload_dir['url'] . '/' . $filename;
 
             /**
             * Check write permissions
