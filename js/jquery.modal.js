@@ -166,11 +166,10 @@
     },
 
     top: function() {
-      var left = (parseInt(this.$elm.css('width')) / 2) + 50;
       this.$elm.css({
         position: 'fixed',
-        top: "100px",
-        left: left + "px",
+        top: (this.$elm.outerHeight() / 2) +20,
+        left: (this.$elm.outerWidth() / 2) +20,
         marginTop: - (this.$elm.outerHeight() / 2),
         marginLeft: - (this.$elm.outerWidth() / 2),
         zIndex: this.options.zIndex + 1
@@ -178,12 +177,11 @@
     },
 
     bottom: function() {
-      var left = (parseInt(this.$elm.css('width')) / 2) + 50;
       this.$elm.css({
         position: 'fixed',
         top: "auto",
-        bottom: "100px",
-        left: left + "px",
+        bottom: (this.$elm.outerHeight() / 2) +20,
+        left: (this.$elm.outerWidth() / 2) +20,
         marginBottom: - (this.$elm.outerHeight() / 2),
         marginLeft: - (this.$elm.outerWidth() / 2),
         zIndex: this.options.zIndex + 1

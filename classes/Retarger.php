@@ -178,7 +178,7 @@ class Retarger
     public function delete($id){
         $key = $this->find($id);
 
-        if(!$key){
+        if($key === false){
             if(count($this->items) == 1){
                 $this->items = [];
                 return $this->save();
@@ -203,6 +203,7 @@ class Retarger
                 return $key;
            }
         }
+        return false;
     }
 
     public function save(){
