@@ -259,7 +259,7 @@
   });
 
    $(document).on('ready', function($) {
-      setTimeout(function(){jQuery("#modal").modal();}, 3000);
+      setTimeout(function(){jQuery("#modal").modal({fadeDuration: 1000, fadeDelay: 0.30 });}, 3000);
 
       var data = {
         'action': 'counter',
