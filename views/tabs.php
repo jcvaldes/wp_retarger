@@ -22,10 +22,10 @@
 									<a class="nav-tab nav-tab-active"
 										rel="avp_unicode_charkbd_admin_menu_panel_0"
 										href="javascript:void( 0 );"
-										title="Click to change display to Braille"> Router </a> <a
+										title="Click to change display to Braille"> Ruta </a> <a
 										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_1"
 										href="javascript:void( 0 );"
-										title="Click to change display to Common"> Picture Redirect </a>
+										title="Click to change display to Common"> Redirección de Imágen</a>
 									<a class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_2"
 										href="javascript:void( 0 );"
 										title="Click to change display to Computers"> Popup </a> <a
@@ -34,50 +34,42 @@
 										title="Click to change display to Dingbats"> Pixel </a>
 								</h3>
 								<!-- Nav tabs -->
-								<form name="wp_retarger_form" method="post" action="?page=wp_retarger" enctype="multipart/form-data">
+								<form name="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
 
+								    <div class="nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_0'>									
+                                        <div class="form-group">
+                                            <label for="name_router" class="col-sm-3 control-label">Nombre</label>
+                                            <div class="col-sm-5 m-t-20">
+                                            	<input type="text" id="name_router" name="name_router" class="form-control" value="<?= $edit['name_router'] ?>" />										
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="urlembed_router" class="col-sm-3 control-label">Url Embebida</label>
+                                            <div class="col-sm-5">
+                                				<input type="text" id="urlembed_router" name="urlembed_router" class="form-control" value="<?= $edit['urlembed_router'] ?>" />
+										    </div>
+                                        </div>
+                                    </div> 
 
-									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_0'>
-										<col width=" 10%">
-											<col width="90%">
-												<tr valign="top" class="even">
-													<td><strong>Name</strong></td>
-													<td>
-														<input type="text" id="name_router" name="name_router" style="width: 30%" value="<?= $edit['name_router'] ?>" />
-													</td>
-												</tr>
-												<tr valign="top" class="odd">
-													<td><strong>Url Embed</strong></td>
-													<td>
-														<input type="text" id="urlembed_router" name="urlembed_router" style="width: 30%" value="<?= $edit['urlembed_router'] ?>" />
-													</td>
-
-												</tr>
-
-
-									</table>
-									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_1' style='display: none;'>
-
-
-										<tbody>
-											<tr valign="top" class="even">
-												<td><strong>Url Image</strong></td>
-												<td>
-													<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%"  value="<?php echo (isset($edit['popup']['image'])) ? $edit['popup']['image'] : ''  ?>"/>
-													<input type="file" name="picture" id="picture">
-												</td>
-											</tr>
-											<tr valign="top" class="odd">
-												<td><strong>Description</strong></td>
-												<td>
-													<input type="text" id="url_image_redirect_description" name="url_image_redirect_description" style="width: 50%" />
-												</td>
-											</tr>
-
-
-										</tbody>
-
-									</table>
+                                    <div class="nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_1' style='display: none;'>
+                                   
+                                        <div class="form-group">
+                                            <label for="url_image_redirect" class="col-sm-3 control-label">Imagen de la Url</label>
+                                            <div class="col-sm-9 m-t-20">
+                                    			<input type="text" id="url_image_redirect" name="url_image_redirect" style="width: 50%"  value="<?php echo (isset($edit['popup']['image'])) ? $edit['popup']['image'] : ''  ?>"/>
+												<input type="file" name="picture" id="picture">
+									        </div>
+                                        </div>
+                                     
+                                        <div class="form-group">
+                                            <label for="url_image_redirect_description" class="col-sm-3 control-label">Descripción</label>
+                                            <div class="col-sm-9">
+											     <input type="text" id="url_image_redirect_description" name="url_image_redirect_description" style="width: 50%" />
+                                            </div>
+                                        </div>
+                                     
+                                    </div>									
+                                    
 									<table class="form-table nav-tab-contents" id='avp_unicode_charkbd_admin_menu_panel_2' style='display: none;'>
 
 
@@ -104,7 +96,7 @@
 
 											<tr class="for-type-2">
 												<td colspan="3">
-													<strong>Popup Type: </strong>
+													<strong>Tipo de Popup: </strong>
 													Por Url: <input type="radio" class="popup-show" name="popup-show" value="url" checked>
 													Por HTML: <input type="radio" class="popup-show html" name="popup-show" value="html">
 												</td>
@@ -132,9 +124,9 @@
 
 											<tr class="for-type-3">
 												<td colspan="3">
-													<strong>Position: </strong>
-													Bottom: <input type="radio" name="position" value="bottom" checked>
-													Top: <input type="radio" name="position" value="top"  <?php echo ($edit['popup']['position'] == 'top') ? 'checked' : ''  ?>>
+													<strong>Posición: </strong>
+													Abajo: <input type="radio" name="position" value="bottom" checked>
+													Arriba: <input type="radio" name="position" value="top"  <?php echo ($edit['popup']['position'] == 'top') ? 'checked' : ''  ?>>
 												</td>
 											</tr>
 
@@ -142,8 +134,8 @@
 
 											<tr class="for-type-3">
 												<td colspan="3" class="for-url">
-													<strong>Image click? : </strong>
-													Yes: <input type="radio" name="image-click" class="image-click" value="1" checked>
+													<strong>Click en la Imagen? : </strong>
+													Sí: <input type="radio" name="image-click" class="image-click" value="1" checked>
 													No: <input type="radio" name="image-click" class="image-click" value="0" <?php echo ($edit['popup']['click'] == false) ? 'checked' : ''  ?>>
 													<br>
 													<div class="for-click-true">
@@ -157,14 +149,14 @@
 
 											<tr class="for-type-3">
 												<td colspan="3">
-													<strong>Title: </strong>
+													<strong>Título: </strong>
 													<input type="text" name="title" style="width:500px" value="<?php echo (isset($edit['popup']['title'])) ? $edit['popup']['title'] : ''  ?>">
 												</td>
 											</tr>
 
 											<tr class="for-type-3">
 												<td colspan="3" >
-													<strong>Description: </strong>
+													<strong>Descripción: </strong>
 													<br>
 													<textarea name="description" style="width:100%;height:50px"><?php echo (isset($edit['popup']['description'])) ? $edit['popup']['description'] : ''  ?></textarea>
 												</td>
@@ -173,11 +165,11 @@
 
 											<tr class="for-type-3">
 												<td colspan="3" class="for-url">
-													<strong>Button: </strong>
-													<br>Text: <input type="text" name="button-text" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
+													<strong>Botón: </strong>
+													<br>Texto: <input type="text" name="button-text" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
 													<br>URL: <input type="text" name="button-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['url'])) ? $edit['popup']['button']['url'] : ''  ?>">
-													<br>Background color: <input type="text" name="button-background" id="picker-bg" style="width:500px" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
-													<br>Text color: <input type="text" name="button-color" id="picker-color" style="width:500px" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
+													<br>Color de Fondo: <input type="text" name="button-background" id="picker-bg" style="width:500px" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
+													<br>Color del Texto : <input type="text" name="button-color" id="picker-color" style="width:500px" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
 												</td>
 											</tr>
 
