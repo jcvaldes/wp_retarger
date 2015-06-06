@@ -176,8 +176,8 @@
 													<strong>Button: </strong>
 													<br>Text: <input type="text" name="button-text" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['text'])) ? $edit['popup']['button']['text'] : ''  ?>">
 													<br>URL: <input type="text" name="button-url" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['url'])) ? $edit['popup']['button']['url'] : ''  ?>">
-													<br>Background color: <input type="text" name="button-background" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
-													<br>Text color: <input type="text" name="button-color" maxlength="255" style="width:500px" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
+													<br>Background color: <input type="text" name="button-background" id="picker-bg" style="width:500px" value="<?php echo (isset($edit['popup']['button']['background'])) ? $edit['popup']['button']['background'] : ''  ?>">
+													<br>Text color: <input type="text" name="button-color" id="picker-color" style="width:500px" value="<?php echo (isset($edit['popup']['button']['color'])) ? $edit['popup']['button']['color'] : ''  ?>">
 												</td>
 											</tr>
 
