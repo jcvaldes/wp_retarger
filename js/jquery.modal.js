@@ -93,6 +93,7 @@
     },
 
     unblock: function() {
+      debugger;
       if(this.options.doFade) {
         this.blocker.fadeOut(this.options.fadeDuration, function() {
           $(this).remove();
@@ -174,6 +175,7 @@
         marginLeft: - (this.$elm.outerWidth() / 2),
         zIndex: this.options.zIndex + 1
       });
+      this.blocker.remove();
     },
 
     bottom: function() {
@@ -186,6 +188,7 @@
         marginLeft: - (this.$elm.outerWidth() / 2),
         zIndex: this.options.zIndex + 1
       });
+      this.blocker.remove();
     },
 
     //Return context for custom events
