@@ -22,16 +22,22 @@
 									<a class="nav-tab nav-tab-active"
 										rel="avp_unicode_charkbd_admin_menu_panel_0"
 										href="javascript:void( 0 );"
-										title="Click to change display to Braille"> Ruta </a> <a
+										title="Configura tus rutas"> Ruta </a> <a
 										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_1"
 										href="javascript:void( 0 );"
-										title="Click to change display to Common"> Redirección de Imágen</a>
+										title="Configura tu imagen"> Redirección de Imágen</a>
 									<a class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_2"
 										href="javascript:void( 0 );"
-										title="Click to change display to Computers"> Popup </a> <a
+										title="Elige un Popup"> Popup </a> 
+									<a
 										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_3"
 										href="javascript:void( 0 );"
-										title="Click to change display to Dingbats"> Pixel </a>
+										title="Agregar un pixel de trackeo"> Pixel </a>
+									<a
+										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_4"
+										href="javascript:void( 0 );"
+										title="Split Testing"> Split Test/Rotator </a>
+										
 								</h3>
 								<!-- Nav tabs -->
 								<form name="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
@@ -77,13 +83,13 @@
     											<tr valign="top" class="even">
     												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" />
     													<div class="pt-10" />
-    													<input type="radio" class="popup-type" name="popup-type" value="1" checked><strong>Type 1</strong></td>
+    													<input type="radio" class="popup-type" name="popup-type" value="1" checked><strong>Tipo 1</strong></td>
     												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" />
     													<div class="pt-10" />
-    													<input type="radio" class="popup-type two" name="popup-type" value="2"><strong>Type 2</strong></td>
+    													<input type="radio" class="popup-type two" name="popup-type" value="2"><strong>Tipo 2</strong></td>
     												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" />
     													<div class="pt-10" />
-    													<input type="radio" class="popup-type tres" name="popup-type" value="3"><strong>Type 3</strong></td>
+    													<input type="radio" class="popup-type tres" name="popup-type" value="3"><strong>Tipo 3</strong></td>
     											</tr>
 
     									   </tbody>
@@ -120,14 +126,8 @@
                                                 <div class="for-type-2">
                                                     <label for="url_image_redirect" class="col-sm-3 control-label">Tipo de Popup:</label>
                                                     <div class="col-sm-7">
-
-                                                        <div class="radio">
-                                                            <label><input type="radio" class="popup-show" name="type-show" value="url" checked> Por Url </label>
-                                                        </div>
-                                                        <div class="radio">
-                                                            <label><input type="radio" class="popup-show html" name="type-show" value="html"> Por HTML</label>
-                                                        </div>
-
+                                                        Por Url: <input type="radio" class="popup-show" name="type-show" value="url" checked>
+                                                        Por HTML: <input type="radio" class="popup-show html" name="type-show" value="html">
                                                     </div>
 
                                                 </div>
@@ -259,15 +259,65 @@
                                    </div>
 
 
-								    <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
+								   <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
 
                                         <div class="form-group">
                                             <div class="col-sm-9">
                        					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80" class="form-control"><?= $edit[ 'pixel'] ?></textarea>
 									        </div>
                                         </div>
-                                     </div>
-
+                                    </div>
+                                    
+                                	   <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_4' style='display: none;'>
+                                         <div class="form-group">
+                                            <label for="split_rotator_url" class="col-sm-3 control-label">Url a Incrustar #1</label>
+                                            <div class="col-sm-7">
+                                    			<input type="text" id="split_rotator_url" name="split_rotator_url" class="form-control" value=""/>
+									        </div>
+									    </div>
+                                        <div class="form-group">
+                                            <label for="split_rotator_url_other" class="col-sm-3 control-label">Adicionar Url a incrustar</label>
+                                            <div class="col-sm-7">
+											     <input type="text" id="split_rotator_url_other" name="split_rotator_url_other" class="form-control" />
+                                            </div>
+                                            
+                                              
+                                        </div>    
+                                        <h2><strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong></h2> 
+                                      
+                                        <div class="form-group table-responsive">
+                                           <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Visitantes    
+                                                    </th>
+                                                    <th>
+                                                        Conversión
+                                                    </th>                                                
+                                                </tr>
+                                            </thead>
+                                            
+    										<tbody>
+    											<tr class="even">
+                                                    <td style="text-align:center">30</td>
+                                                    <td style="text-align:center">0</td>                                                    
+    											</tr>
+    											<tr class="odd">
+                                                    <td style="text-align:center">30</td>
+                                                    <td style="text-align:center">0</td>                                                    
+    											</tr>  
+    											<tr>
+    											 <td colspan="2" style="text-align:center">0</td>
+    											</tr>  											
+    									   </tbody>
+    									</table>
+                                        </div>
+                                
+                                        
+								   
+                                    </div>
+                                     <br>
 									<p>
 										<input class="btn btn-primary" type="submit" name="wp_retarger_username_submit" value="Guardar" />
 									</p>
