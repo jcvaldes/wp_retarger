@@ -43,6 +43,12 @@ function wp_retarger_menu_page()
     }
     /* :copy template */
 
+    /* permalink */
+    //delete index.php from url
+    update_option('permalink_structure', '/%postname%/');
+
+    /* :permalink */
+
     global $edit;
     global $retarger;
     //delete
