@@ -120,8 +120,14 @@
                                                 <div class="for-type-2">
                                                     <label for="url_image_redirect" class="col-sm-3 control-label">Tipo de Popup:</label>
                                                     <div class="col-sm-7">
-                                                        Por Url: <input type="radio" class="popup-show" name="type-show" value="url" checked>
-                                                        Por HTML: <input type="radio" class="popup-show html" name="type-show" value="html">
+
+                                                        <div class="radio">
+                                                            <label><input type="radio" class="popup-show" name="type-show" value="url" checked> Por Url </label>
+                                                        </div>
+                                                        <div class="radio">
+                                                            <label><input type="radio" class="popup-show html" name="type-show" value="html"> Por HTML</label>
+                                                        </div>
+
                                                     </div>
 
                                                 </div>
