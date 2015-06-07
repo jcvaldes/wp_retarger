@@ -172,7 +172,7 @@
 													<br>
 													<div class="for-click-true m-t-10">
 
-													<strong class="col-sm-3">URL: </strong> <input type="text" class="col-sm-7" name="image-click-url" maxlength="255" value="<?php echo (isset($edit['popup']['image-click-url'])) ? $edit['popup']['image-click-url'] : ''  ?>">
+													<input type="text" class="form-control col-sm-10" name="image-click-url" placeholder="Ingresar una URL" maxlength="255" value="<?php echo (isset($edit['popup']['image-click-url'])) ? $edit['popup']['image-click-url'] : ''  ?>">
 													</div>
                                                </div>
 
@@ -200,7 +200,7 @@
                                                 <div class="col-sm-3">
                                                     <label for="button-text" class="control-label col-sm-12">Botón:</label>
                                                     <br>
-                                                    <div class="col-sm-12 text-center m-t-20">
+                                                    <div class="col-md-offset-6 col-sm-6 text-center m-t-20">
                                                         <button id="example-btn" type="button" class="btn ">Ejemplo</button>
                                                     </div>
 
