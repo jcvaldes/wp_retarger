@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <style type="text/css" media="screen">
         h1, span.edit-link{display:none;}
+        #main-content{
+            background-color: #fff !important;
+        }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
     <div id="main-content" class="main-content">
@@ -19,6 +23,8 @@
                         // If comments are open or we have at least one comment, load up the comment template.
                     endwhile;
                 ?>
+
+
             </div><!-- #content -->
         </div><!-- #primary -->
     </div><!-- #main-content -->
