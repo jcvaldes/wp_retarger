@@ -120,7 +120,7 @@ class Retarger
 
             $modal = $assets . '<div class="modalb" id="modal" style="display:none;width:600px;"  data-position="'.$data['position'].'"> <table width="100%"> <tr> <td width="100">'.$img.'</td> <td valign="top"> <p id="p3-title"></p> </td> <td valign="bottom" align="center"> <a id="p3-button" style="color:" href=""></a> </td> </tr> <tr><td colspan="3"><p id="p3-description"></p></td></tr></table> </div>';
 
-            $modalb =   '<div class="modalb col-xs-12 col-md-6 col-lg-6" id="modal" style="display:none;"  data-position="'.$data['position'].'">'.
+            $modalb =   '<div class="modalb col-xs-6 col-md-6 col-lg-6" id="modal" style="display:none;"  data-position="'.$data['position'].'">'.
                             '<div class="row">' .
                                 '<div class="">' .
                                     '<div class="col-md-3 col-xs-12">' .
