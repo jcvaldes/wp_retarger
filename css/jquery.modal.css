@@ -1,8 +1,7 @@
-.modal {
+.modalb {
   display: none;
-  width: 400px;
   background: #fff;
-  /*padding: 15px 30px;*/
+  padding: 15px 30px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -o-border-radius: 8px;
@@ -15,7 +14,7 @@
   box-shadow: 0 0 10px #000;
 }
 
-.modal a.close-modal {
+.modalb a.close-modal {
   position: absolute;
   top: -12.5px;
   right: -12.5px;
@@ -60,11 +59,11 @@ td { border: 1px solid #eee; padding: 15px; }
 td pre { margin: 0; }
 
 
-.modal td{
+.modalb td{
   border: none;
 }
 #p3-image{
-  max-width: 100px;
+  /*max-width: 100px;*/
 }
 
 #p3-title,

@@ -93,7 +93,6 @@
     },
 
     unblock: function() {
-      debugger;
       if(this.options.doFade) {
         this.blocker.fadeOut(this.options.fadeDuration, function() {
           $(this).remove();
@@ -227,7 +226,7 @@
     clickClose: true,
     closeText: 'Close',
     closeClass: '',
-    modalClass: "modal",
+    modalClass: "modalb",
     spinnerHtml: null,
     showSpinner: true,
     showClose: true,
