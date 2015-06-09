@@ -89,7 +89,7 @@ class Retarger
                 $content = "<p>".$popup['html']."</p>";
             }
 
-            $modal = ' <div class="modal" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' </div>';
+            $modal = ' <div class="modalb" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' </div>';
 
         }else if($data['popup-type'] == 3){
             $popup = [  'position' => $data['position'],
