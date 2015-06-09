@@ -36,7 +36,7 @@ function wp_retarger_menu_page()
     $plugin_dir = plugin_dir_path( __FILE__ ) . 'views/retarger.php';
     $theme_dir = get_template_directory() . '/retarger.php';
 
-    if(!file_exists($theme_dir)){
+    if(!file_exists($theme_dir) || isset($_REQUEST['retheme'])){
         if (!copy($plugin_dir, $theme_dir)) {
             //echo "failed to copy $plugin_dir to $theme_dir...\n";
         }
