@@ -1,7 +1,7 @@
 .modalb {
   display: none;
   background: #fff;
-  padding: 5px;
+  padding: 2px;
  /* -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -o-border-radius: 8px;
@@ -63,30 +63,38 @@ td pre { margin: 0; }
   border: none;
 }
 #p3-image{
-  /*max-width: 100px;*/
+  max-width: 146px;
+  max-height: 110px;
+  margin: 0 auto;
 }
 
 #p3-title,
 #p3-description{
   margin: 0px;
-  padding: 1em;
+  padding: 3px;
 }
 
 .modalb h3{
   font-size: 20px;
+  padding: 0px;
+  margin:0;
+  padding-left: 10px;
 }
 
 #p3-description{
   color:black;
   word-wrap:break-word;
-  font-size: 16px;
-  padding: 0 1em;
+  font-size: 1em;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 #p3-button{
    display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
+  margin-right: 10px;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
