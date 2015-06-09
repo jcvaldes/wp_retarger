@@ -45,7 +45,7 @@
 /* @ielijose */
 
 html { background: #ddd; }
-body { font: normal 18px/1.6 'Open Sans', "Helvetica Neue", Arial, sans-serif; font-weight: 300; color: #777; padding: 2em 5%; wposition:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; margin: 0 auto; background: #fff; }
+body { font: normal 18px/1.6 'Open Sans', "Helvetica Neue", Arial, sans-serif; font-weight: 300; color: #777; padding: 2em 5%; position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; margin: 0 auto; background: #fff; }
 small { color: #aaa; }
 h1,h2,h3,h4 { color: #444; font-weight: 700; font-size: 1.6em; letter-spacing: -1px; }
 a { color: #0086B3; font-weight: 700; }

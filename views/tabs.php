@@ -28,7 +28,7 @@
 										title="Configura tu imagen"> Redirección de Imágen</a>
 									<a class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_2"
 										href="javascript:void( 0 );"
-										title="Elige un Popup"> Popup </a> 
+										title="Elige un Popup"> Popup </a>
 									<a
 										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_3"
 										href="javascript:void( 0 );"
@@ -37,7 +37,7 @@
 										class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_4"
 										href="javascript:void( 0 );"
 										title="Split Testing"> Split Test/Rotator </a>
-										
+
 								</h3>
 								<!-- Nav tabs -->
 								<form name="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
@@ -126,8 +126,8 @@
                                                 <div class="for-type-2">
                                                     <label for="url_image_redirect" class="col-sm-3 control-label">Tipo de Popup:</label>
                                                     <div class="col-sm-7">
-                                                        Por Url: <input type="radio" class="popup-show" name="type-show" value="url" checked>
-                                                        Por HTML: <input type="radio" class="popup-show html" name="type-show" value="html">
+                                                        Por Url: <input type="radio" class="popup-show" name="popup-show" value="url" checked>
+                                                        Por HTML: <input type="radio" class="popup-show html" name="popup-show" value="html">
                                                     </div>
 
                                                 </div>
@@ -267,7 +267,7 @@
 									        </div>
                                         </div>
                                     </div>
-                                    
+
                                 	   <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_4' style='display: none;'>
                                          <div class="form-group">
                                             <label for="split_rotator_url" class="col-sm-3 control-label">Url a Incrustar #1</label>
@@ -280,42 +280,42 @@
                                             <div class="col-sm-7">
 											     <input type="text" id="split_rotator_url_other" name="split_rotator_url_other" class="form-control" />
                                             </div>
-                                            
-                                              
-                                        </div>    
-                                        <h2><strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong></h2> 
-                                      
+
+
+                                        </div>
+                                        <h2><strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong></h2>
+
                                         <div class="form-group table-responsive">
                                            <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>
-                                                        Visitantes    
+                                                        Visitantes
                                                     </th>
                                                     <th>
                                                         Conversión
-                                                    </th>                                                
+                                                    </th>
                                                 </tr>
                                             </thead>
-                                            
+
     										<tbody>
     											<tr class="even">
                                                     <td style="text-align:center">30</td>
-                                                    <td style="text-align:center">0</td>                                                    
+                                                    <td style="text-align:center">0</td>
     											</tr>
     											<tr class="odd">
                                                     <td style="text-align:center">30</td>
-                                                    <td style="text-align:center">0</td>                                                    
-    											</tr>  
+                                                    <td style="text-align:center">0</td>
+    											</tr>
     											<tr>
     											 <td colspan="2" style="text-align:center">0</td>
-    											</tr>  											
+    											</tr>
     									   </tbody>
     									</table>
                                         </div>
-                                
-                                        
-								   
+
+
+
                                     </div>
                                      <br>
 									<p>
