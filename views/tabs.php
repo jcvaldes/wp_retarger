@@ -114,7 +114,7 @@
 
                                                     <div class="col-sm-6">
                                                         <div class="input-group">
-                                                            <input name="popup-height" type="text" class="form-control" value="<?php echo (isset($edit['popup']['width'])) ? $edit['popup']['width'] : '800'  ?>" aria-describedby="basic-addon2">
+                                                            <input name="popup-height" type="text" class="form-control" value="<?php echo (isset($edit['popup']['height'])) ? $edit['popup']['height'] : '600'  ?>" aria-describedby="basic-addon2">
                                                             <span class="input-group-addon" id="basic-addon2">px</span>
                                                         </div>
                                                     </div>
