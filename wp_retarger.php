@@ -19,6 +19,15 @@ $myOptions = array();
 $retarger = new Retarger();
 //var_dump($retarger->getAll());exit;
 
+require 'licenser/licenser.php';
+
+
+if(!$retarger->isActived() && $_REQUEST['page'] =='wp_retarger' ){
+    header('Location: '.get_site_url().'/wp-admin/admin.php?page=wp_retarger-licenser');
+    //wp_redirect('/wp-admin/admin.php?page=wp_retarger-licenser', 301 );
+    exit;
+}
+
 function register_wp_retarger_menu_page()
 {
     $hook = add_menu_page('WP Retarger', 'WP Retarger', 'manage_options', 'wp_retarger', 'wp_retarger_menu_page', 'dashicons-admin-tools', 6);

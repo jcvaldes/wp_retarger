@@ -3,11 +3,16 @@
 class Retarger
 {
     private $items = [];
+    private $license = false;
+    private $status = false;
     public $table;
 
     public function __construct(){
+        //delete_option( 'retarger_license_key' );delete_option( 'retarger_license_status' );
         $this->items = $this->getAll();
         $this->table = new RoutersTable($this->items);
+        $this->license = get_option( 'retarger_license_key' );
+        $this->status = get_option( 'retarger_license_status' );
     }
 
     public function get($id){
@@ -234,6 +239,35 @@ class Retarger
         }
         $this->save();
     }
+
+    /* Licenser */
+
+    public function getStatus(){
+        return $this->status;
+    }
+
+    public function getLicense(){
+        return $this->license;
+    }
+
+    public function setStatus($status){
+        $this->status = $status;
+        return update_option('retarger_license_status', $this->status);
+    }
+
+    public function setLicense($license){
+        $this->license = $license;
+        return update_option('retarger_license_key', $this->license);
+    }
+
+    public function isActived(){
+        if($this->status == 'active'){
+            return true;
+        }
+        return false;
+    }
+
+
 }
 
 ?>
