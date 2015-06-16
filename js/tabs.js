@@ -52,6 +52,7 @@ jQuery(document).ready( function($) {
             $(".for-type-3").hide();
         }else if(index == 2){
             $(".for-type-2").show();
+            $(".for-type-3").hide();
         }else if(index == 3){
             $(".for-type-2").hide();
             $(".for-type-3").show();
