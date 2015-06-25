@@ -117,6 +117,9 @@ function wp_retarger_enqueue_scripts_admin()
     wp_register_script('colorpick', plugin_dir_url(__FILE__) . '/js/colpick.js');
     wp_enqueue_script('colorpick');
 
+    wp_register_script('split-test', plugin_dir_url(__FILE__) . '/js/split-test.js');
+    wp_enqueue_script('split-test');
+
 
 }
 
@@ -164,6 +167,20 @@ function prefix_ajax_counter() {
     $id = $_REQUEST['router_id'];
 
     return $retarger->counter($id);
+}
+
+/* SPLIT AJAX */
+
+add_action( 'wp_ajax_splittest', 'prefix_ajax_splittest' );
+add_action( 'wp_ajax_nopriv_splittest', 'prefix_ajax_splittest' );
+
+function prefix_ajax_splittest() {
+    global $retarger;
+
+    $id = $_REQUEST['router_id'];
+
+    $retarger->split($id);
+    die();
 }
 
 /* TEMPLATE */

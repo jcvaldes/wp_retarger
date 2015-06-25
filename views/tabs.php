@@ -1,4 +1,4 @@
-
+<?php //var_dump(  $edit['split']['limit']  ); exit; ?>
 <div class="wrap">
 
 	<div id="icon-options-general" class="icon32"></div>
@@ -268,53 +268,81 @@
                                         </div>
                                     </div>
 
-                                	   <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_4' style='display: none;'>
-                                         <div class="form-group">
-                                            <label for="split_rotator_url" class="col-sm-3 control-label">Url a Incrustar #1</label>
-                                            <div class="col-sm-7">
-                                    			<input type="text" id="split_rotator_url" name="split_rotator_url" class="form-control" value=""/>
-									        </div>
-									    </div>
-                                        <div class="form-group">
-                                            <label for="split_rotator_url_other" class="col-sm-3 control-label">Adicionar Url a incrustar</label>
-                                            <div class="col-sm-7">
-											     <input type="text" id="split_rotator_url_other" name="split_rotator_url_other" class="form-control" />
+                                    <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_4' style='display: none;'>
+
+                                        <div class="row hide" id="header">
+                                            <div class="col-md-2 col-md-offset-10">
+                                                <div class="col-md-6" style="background-color:#ccc;font-weight:bold">Vis </div>
+                                                <div class="col-md-6" style="background-color:#ccc;font-weight:bold">Con</div>
                                             </div>
-
-
-                                        </div>
-                                        <h2><strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong></h2>
-
-                                        <div class="form-group table-responsive">
-                                           <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Visitantes
-                                                    </th>
-                                                    <th>
-                                                        Conversión
-                                                    </th>
-                                                </tr>
-                                            </thead>
-
-    										<tbody>
-    											<tr class="even">
-                                                    <td style="text-align:center">30</td>
-                                                    <td style="text-align:center">0</td>
-    											</tr>
-    											<tr class="odd">
-                                                    <td style="text-align:center">30</td>
-                                                    <td style="text-align:center">0</td>
-    											</tr>
-    											<tr>
-    											 <td colspan="2" style="text-align:center">0</td>
-    											</tr>
-    									   </tbody>
-    									</table>
                                         </div>
 
+                                        <div class="row m-t-10" id="urls">
+                                        <? $index = 0; ?>
+                                            <?php if(isset($edit['split']['urls'])){
 
+                                                foreach ($edit['split']['urls'] as $key => $url) { $index = $index + $url['visit'];?>
+                                                <div class="col-md-12 m-t-10 url">
+                                                    <div class="col-md-10">
+                                                        <label for="split_rotator_url-'+indexcharp+'" class="col-sm-3 control-label">Url a Incrustar #<?php echo $key+1  ?></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" name="split_rotator_url[]" class="form-control" value="<?= $url['url'] ?>" />
+                                                            <input type="hidden" name="split_rotator_visit[]" value="<?= $url['visit'] ?>">
+                                                        </div>
+                                                        <div class="col-sm-1 form-inline">
+                                                            <button type="button" class="remove-url">x</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <?php if($url['static'] == true){ ?>
+                                                            <div class="col-md-4 col-md-offset-2" style="background-color: green"><?= $url['visit'] ?></div>
+                                                        <?php } else {?>
+                                                            <div class="col-md-4 col-md-offset-2"><?= $url['visit'] ?></div>
+                                                        <?php } ?>
+
+                                                        <div class="col-md-4 col-md-offset-2">0</div>
+                                                    </div>
+                                                </div>
+
+                                            <?php } } ?>
+
+                                            <input type="hidden" id="url-count" value="<?php echo (isset($edit['split']['urls'])) ? count($edit['split']['urls']) : 0 ?>">
+                                        </div>
+
+                                        <div class="row m-t-10 hide" id="footer">
+                                            <div class="col-md-10 text-right">
+                                                <strong>Total:</strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-md-6 text-center" style="background-color:#eee;font-weight:bold"><?= $index ?></div>
+                                                <div class="col-md-6 text-center" style="background-color:#eee;font-weight:bold">0</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row m-t-10 hide" id="counter">
+                                            <div class="col-md-10 text-right">
+                                                <strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="text" class="form-control" name="visit-limit" value="<?php echo (isset($edit['split']['limit'])) ? $edit['split']['limit'] : 0 ?>">
+                                            </div>
+                                            <hr class="col-md-11">
+                                        </div>
+
+
+                                        <div class="row m-t-10" id="add">
+                                            <div class="col-md-12">
+                                                <div class="col-md-10">
+                                                    <label for="split_rotator_url_other" class="col-sm-3 control-label">Agregar URL:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" id="url-to-add" class="form-control" placeholder="http://example.com" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-success" type="button" id="add-url">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
                                      <br>
@@ -331,29 +359,19 @@
 									<?php } ?>
 								</form>
 
-
 							</div>
-
 						</div>
 						<!-- .inside -->
-
 					</div>
 					<!-- .postbox -->
-
 				</div>
 				<!-- .meta-box-sortables .ui-sortable -->
-
 			</div>
 			<!-- post-body-content -->
-
-
-
 		</div>
 		<!-- #post-body .metabox-holder .columns-2 -->
-
 		<br class="clear">
 	</div>
 	<!-- #poststuff -->
-
 </div>
 <!-- .wrap -->

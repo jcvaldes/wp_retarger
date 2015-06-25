@@ -20,7 +20,7 @@ class Retarger
     }
 
     public function store($data){
-
+        //var_dump($data);exit;
         /* TYPE */
         $popup = [];
         $modal = '';
@@ -32,46 +32,36 @@ class Retarger
         $picture = $_FILES['picture'];
 
         if($picture['error'] == 0){
-
             $filetmp = $picture['tmp_name'];
-
             //clean filename and extract extension
             $filename = $picture['name'];
-
             // get file info
-            // @fixme: wp checks the file extension....
             $filetype = wp_check_filetype( basename( $filename ), null );
             $filetitle = preg_replace('/\.[^.]+$/', '', basename( $filename ) );
             $filename = $filetitle . '.' . $filetype['ext'];
             $upload_dir = wp_upload_dir();
-
             /**
-            * Check if the filename already exist in the directory and rename the
-            * file if necessary
+            * Check if the filename already exist in the directory and rename the file if necessary
             */
             $i = 0;
             while ( file_exists( $upload_dir['path'] .'/' . $filename ) ) {
-            $filename = $filetitle . '_' . $i . '.' . $filetype['ext'];
-            $i++;
+                $filename = $filetitle . '_' . $i . '.' . $filetype['ext']; $i++;
             }
             $filedest = $upload_dir['path'] . '/' . $filename;
-
             $image = $upload_dir['url'] . '/' . $filename;
-
             /**
             * Check write permissions
             */
             if ( !is_writeable( $upload_dir['path'] ) ) {
-            die('Unable to write to directory %s. Is this directory writable by the server?');
-            return;
+                die('Unable to write to directory %s. Is this directory writable by the server?');
+                return;
             }
-
             /**
             * Save temporary file to uploads dir
             */
             if ( !@move_uploaded_file($filetmp, $filedest) ){
-            die("Error, the file $filetmp could not moved to : $filedest ");
-            continue;
+                die("Error, the file $filetmp could not moved to : $filedest ");
+                continue;
             }
 
         }else{
@@ -138,16 +128,34 @@ class Retarger
                                 '</div>' .
                             '</div>' .
                         '</div>';
-
            /* */
+        }
 
+        /* SPLIT TEST */
+        $split = [];
+        if(count($data['split_rotator_url'])){ //ENABLE
+            $x = [];
+            $visits = $data['split_rotator_visit'];
+            foreach ($data['split_rotator_url'] as $key => $surl) {
+                $v = (isset($visits[$key])) ? $visits[$key] : 0;
+                $aux = ['url' => $surl, 'visit' => $v, 'static' => false];
+                array_push($x, $aux);
+            }
+
+            $split['urls'] = $x;
+            $split['limit'] = $data['visit-limit'];
+            $split['static'] = false;
+
+            $iframe = '<input type="hidden" id="split-test" value="true">';
+        }else{
+            $iframe = '<iframe src="'.$data['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>' . $modal;
         }
 
         /* IFRAME */
 
         $pixel = $data['wp_retarger_pixel'];
 
-        $iframe = '<iframe src="'.$data['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>' . $modal;
+
         /* Create page */
         $page = array(
           'post_title'    => wp_strip_all_tags($data['name_router']),
@@ -172,7 +180,8 @@ class Retarger
             'post_id' => $post_id,
             'visits' => 0,
             'type' => $data['popup-type'],
-            'popup' => $popup
+            'popup' => $popup,
+            'split' => $split
         );
 
         array_push($this->items, $aux);
@@ -239,6 +248,46 @@ class Retarger
         }
         $this->save();
     }
+
+    public function split($id){
+        $key = $this->find($id);
+        if(isset($this->items[$key])){
+
+            if($this->items[$key]['split']['static'] == true){
+                foreach ($this->items[$key]['split']['urls'] as $key => $urls) {
+                    if($urls['static'] == true){
+                        $iframe = '<iframe src="'.$urls['url'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>';
+                        echo json_encode(['url' => $urls['url'], 'static' => $urls['visit'], 'iframe' => $iframe]);
+                        exit;
+                    }
+                }
+            }
+
+
+            $urls = $this->items[$key]['split']['urls'];
+            $limit = $this->items[$key]['split']['limit'];
+
+            $u = array_rand($urls);
+
+            if(isset($this->items[$key]['split']['urls'][$u]['visit'])){
+                $this->items[$key]['split']['urls'][$u]['visit'] = ($this->items[$key]['split']['urls'][$u]['visit']+1);
+
+                if($this->items[$key]['split']['urls'][$u]['visit'] >= $limit && $limit > 0){
+                    $this->items[$key]['split']['static'] = true;
+                    $this->items[$key]['split']['urls'][$u]['static'] = true;
+                }
+            }else{
+                $this->items[$key]['split']['urls'][$u]['visit'] = 1;
+            }
+
+            $iframe = '<iframe src="'.$urls[$u]['url'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>';
+
+            echo json_encode(['url' => $urls[$u]['url'], 'visit' => $urls[$u]['visit'], 'iframe' => $iframe]);
+        }
+        $this->save();
+    }
+
+
 
     /* Licenser */
 

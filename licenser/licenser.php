@@ -73,13 +73,12 @@ function edd_sanitize_license( $new ) {
 
 function edd_sample_activate_license() {
     global $retarger;
-    define("LICENSER_URL", "http://3541cacd.ngrok.io/api/activate");
+    define("LICENSER_URL", "http://licenser.sofiayoscar.es/api/activate");
     //var_dump($_POST); exit;
 
 
     // listen for our activate button to be clicked
     if( isset( $_POST['edd_license_activate'] ) ) {
-var_dump("Activando");
         // run a quick security check
         if( ! check_admin_referer( 'edd_sample_nonce', 'edd_sample_nonce' ) )
             return; // get out if we didn't click the Activate button

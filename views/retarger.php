@@ -15,7 +15,7 @@
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= get_site_url(); ?>/wp-content/plugins/wp_retarger/classes/../css/jquery.modal.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?= get_site_url(); ?>/wp-content/plugins/wp_retarger/css/jquery.modal.css" type="text/css" media="screen" />
 </head>
 <body>
     <div id="main-content" class="main-content">
@@ -39,4 +39,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="<?= get_site_url(); ?>/wp-content/plugins/wp_retarger/js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?= get_site_url(); ?>/wp-content/plugins/wp_retarger/js/split-test-frontend.js" type="text/javascript" charset="utf-8"></script>
 </html>
