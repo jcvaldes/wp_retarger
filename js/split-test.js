@@ -60,4 +60,9 @@
         toogleUrls();
     });
 
+    /* Copy */
+
+    var client = new ZeroClipboard( $(".copy-btn") );
+    client.on( "ready", function( readyEvent ) {} );
+
 })(jQuery);

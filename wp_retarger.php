@@ -117,10 +117,11 @@ function wp_retarger_enqueue_scripts_admin()
     wp_register_script('colorpick', plugin_dir_url(__FILE__) . '/js/colpick.js');
     wp_enqueue_script('colorpick');
 
+    wp_register_script('zero-clip', plugin_dir_url(__FILE__) . '/js/ZeroClipboard.min.js');
+    wp_enqueue_script('zero-clip');
+
     wp_register_script('split-test', plugin_dir_url(__FILE__) . '/js/split-test.js');
     wp_enqueue_script('split-test');
-
-
 }
 
 function wp_retarger_enqueue_scripts_front()

@@ -308,13 +308,13 @@
 
                                                     <div class="col-md-12 m-t-10 ">
                                                         <div class="col-md-10">
-                                                            <label for="split_rotator_url-'+indexcharp+'" class="col-sm-3 control-label">Pixel de conversión</label>
+                                                            <label for="split_rotator_url" class="col-sm-3 control-label">Pixel de conversión</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" class="form-control" value='<img src="<?= get_site_url() ?>/wp-admin/admin-ajax.php?action=convertion&id=<?= $edit['ID'] ?>&url=<?= $url['url'] ?>">' />
+                                                                <input type="text" id="input-<?= $key ?>" class="form-control to-copy" value='<img src="<?= get_site_url() ?>/wp-admin/admin-ajax.php?action=convertion&id=<?= $edit['ID'] ?>&url=<?= $url['url'] ?>">' />
 
                                                             </div>
                                                             <div class="col-sm-1 form-inline">
-                                                                <button type="button" class="btn btn-info remove-url">Copiar</button>
+                                                                <button type="button" class="btn btn-info copy-btn" data-clipboard-text='<img src="<?= get_site_url() ?>/wp-admin/admin-ajax.php?action=convertion&id=<?= $edit['ID'] ?>&url=<?= $url['url'] ?>">'>Copiar</button>
                                                             </div>
 
                                                         </div>
