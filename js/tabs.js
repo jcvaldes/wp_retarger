@@ -92,6 +92,14 @@ jQuery(document).ready( function($) {
     if($("#type-show").val() == 'html'){
         $(".html").trigger('click');
     }
+    $("#wp_retarger_form").on("submit", function(){
+        if($("#nombre_ruta").val().length == 0){
+            $("#nombre_ruta").focus();
+            alert("El nombre de la ruta es obligatorio.");
+            return false;
+        }
+    })
+
 
 
 

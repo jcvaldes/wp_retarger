@@ -26,6 +26,8 @@ class Retarger
         $modal = '';
         $router_id = uniqid();
 
+        $boolModal = false;
+
         /* PICTURE */
         $image = false;
 
@@ -70,6 +72,7 @@ class Retarger
 
 
         if($data['popup-type'] == 2){
+            $boolModal = true;
             $popup = [  'width' => $data['popup-width'],
                         'height' => $data['popup-height'],
                         'show' => $data['popup-show'],
@@ -87,6 +90,7 @@ class Retarger
             $modal = ' <div class="modalb" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' </div>';
 
         }else if($data['popup-type'] == 3){
+            $boolModal = true;
             $popup = [  'position' => $data['position'],
                         'click' => !!$data['image-click'],
                         'image-click-url' => $data['image-click-url'],
@@ -136,17 +140,19 @@ class Retarger
         if(count($data['split_rotator_url'])){ //ENABLE
             $x = [];
             $visits = $data['split_rotator_visit'];
+            $conversions = $data['split_rotator_conversions'];
             foreach ($data['split_rotator_url'] as $key => $surl) {
                 $v = (isset($visits[$key])) ? $visits[$key] : 0;
-                $aux = ['url' => $surl, 'visit' => $v, 'static' => false];
+                $c = (isset($conversions[$key])) ? $conversions[$key] : 0;
+                $aux = ['url' => $surl, 'visit' => $v, 'conversions' => $c, 'static' => false];
                 array_push($x, $aux);
             }
 
             $split['urls'] = $x;
-            $split['limit'] = $data['visit-limit'];
+            $split['limit'] = $data['conversions-limit'];
             $split['static'] = false;
 
-            $iframe = '<input type="hidden" id="split-test" value="true">';
+            $iframe = '<input type="hidden" id="split-test" value="true">' . $modal;
         }else{
             $iframe = '<iframe src="'.$data['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>' . $modal;
         }
@@ -268,14 +274,10 @@ class Retarger
             $limit = $this->items[$key]['split']['limit'];
 
             $u = array_rand($urls);
+            $u = rand(0, count($urls) - 1);
 
             if(isset($this->items[$key]['split']['urls'][$u]['visit'])){
                 $this->items[$key]['split']['urls'][$u]['visit'] = ($this->items[$key]['split']['urls'][$u]['visit']+1);
-
-                if($this->items[$key]['split']['urls'][$u]['visit'] >= $limit && $limit > 0){
-                    $this->items[$key]['split']['static'] = true;
-                    $this->items[$key]['split']['urls'][$u]['static'] = true;
-                }
             }else{
                 $this->items[$key]['split']['urls'][$u]['visit'] = 1;
             }
@@ -283,6 +285,32 @@ class Retarger
             $iframe = '<iframe src="'.$urls[$u]['url'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>';
 
             echo json_encode(['url' => $urls[$u]['url'], 'visit' => $urls[$u]['visit'], 'iframe' => $iframe]);
+        }
+        $this->save();
+    }
+
+    public function conversion($id, $url){
+        $key = $this->find($id);
+        if(isset($this->items[$key])){
+
+            $urls = $this->items[$key]['split']['urls'];
+            $limit = $this->items[$key]['split']['limit'];
+
+            foreach ($urls as $k => $u) {
+                if($u['url'] == $url){
+                    if(isset($this->items[$key]['split']['urls'][$k]['conversions'])){
+                        $this->items[$key]['split']['urls'][$k]['conversions'] = ($this->items[$key]['split']['urls'][$k]['conversions']+1);
+
+                        if($this->items[$key]['split']['urls'][$k]['conversions'] >= $limit && $limit > 0){
+                            $this->items[$key]['split']['static'] = true;
+                            $this->items[$key]['split']['urls'][$k]['static'] = true;
+                        }
+                    }else{
+                        $this->items[$key]['split']['urls'][$k]['conversions'] = 1;
+                    }
+                }
+            }
+
         }
         $this->save();
     }

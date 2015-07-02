@@ -20,10 +20,10 @@
             '<div class="col-md-10">' +
                 '<label for="split_rotator_url-'+indexcharp+'" class="col-sm-3 control-label">Url a Incrustar #'+indexcharp+'</label>' +
                 '<div class="col-sm-8">' +
-                    '<input type="text" name="split_rotator_url[]" class="form-control" value="'+aux+'" />' +
+                    '<input type="url" required="required" name="split_rotator_url[]" class="form-control" value="'+aux+'" />' +
                 '</div>' +
                 '<div class="col-sm-1 form-inline">' +
-                    '<button type="button" class="remove-url">x</button>' +
+                    '<button type="button" class="btn remove-url">x</button>' +
                 '</div>' +
             '</div>' +
             '<div class="col-md-2">' +

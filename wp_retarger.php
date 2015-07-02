@@ -1,11 +1,11 @@
 <?php
 /*
  * Plugin Name: wp retarger
- * Plugin URI: http://conectan2enlared.com
+ * Plugin URI: http://conecta2enlared.com/
  * Description: Herramientas de retargueting.
  * Version: El número de versión del plugin e.j.: 1.0
- * Author: Juan Carlos Valdés
- * Author URI: http://servicioswebmoviles.com/
+ * Author: Conecta2
+ * Author URI: http://conecta2enlared.com/
  * License: Todos Los Derechos Reservados
  */
 
@@ -180,6 +180,19 @@ function prefix_ajax_splittest() {
     $id = $_REQUEST['router_id'];
 
     $retarger->split($id);
+    die();
+}
+
+add_action( 'wp_ajax_convertion', 'prefix_ajax_convertion' );
+add_action( 'wp_ajax_nopriv_convertion', 'prefix_ajax_convertion' );
+
+function prefix_ajax_convertion() {
+    global $retarger;
+
+    $id = $_REQUEST['id'];
+    $url = $_REQUEST['url'];
+
+    $retarger->conversion($id, $url);
     die();
 }
 

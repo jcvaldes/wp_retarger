@@ -40,19 +40,21 @@
 
 								</h3>
 								<!-- Nav tabs -->
-								<form name="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
+								<form name="wp_retarger_form" id="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
 
 								    <div class="nav-tab-contents m-t-20" id='avp_unicode_charkbd_admin_menu_panel_0'>
                                         <div class="form-group">
                                             <label for="name_router" class="col-sm-3 control-label">Nombre</label>
                                             <div class="col-sm-7">
-                                            	<input type="text" id="name_router" name="name_router" class="form-control" value="<?= $edit['name_router'] ?>" />
+                                            	<input type="text" id="nombre_ruta" name="name_router" class="form-control" value="<?= $edit['name_router'] ?>" />
+                                                <small>Url de Router, por ejemplo: <?= get_site_url() ?><strong>/ruta-redes</strong></small>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="urlembed_router" class="col-sm-3 control-label">Url Embebida</label>
                                             <div class="col-sm-7">
                                 				<input type="text" id="urlembed_router" name="urlembed_router" class="form-control" value="<?= $edit['urlembed_router'] ?>" />
+                                                <small>No se toma en cuenta para <strong>Split Test/Rotator</strong></small>
 										    </div>
                                         </div>
                                     </div>
@@ -60,10 +62,11 @@
                                     <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_1' style='display: none;'>
 
                                         <div class="form-group">
-                                            <label for="url_image_redirect" class="col-sm-3 control-label">Imagen de la Url</label>
+                                            <label for="url_image_redirect" class="col-sm-3 control-label">Url de la Imagen </label>
                                             <div class="col-sm-7">
                                     			<input type="text" id="url_image_redirect" name="url_image_redirect" class="form-control" value="<?php echo (isset($edit['popup']['image'])) ? $edit['popup']['image'] : ''  ?>"/>
 												<input type="file" name="picture" id="picture">
+                                                <small>Se usa para el Popup 3, escribe la dirección de una imagen o carga una desde tu ordenador.</small>
 									        </div>
                                         </div>
 
@@ -262,8 +265,9 @@
 								   <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
 
                                         <div class="form-group">
-                                            <div class="col-sm-9">
-                       					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" cols="80" class="form-control"><?= $edit[ 'pixel'] ?></textarea>
+                                            <div class="col-sm-12">
+                       					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" class="form-control col-md-12"><?= $edit[ 'pixel'] ?></textarea>
+                                                <small>Escribe algún código para "Trackear" tu ruta. </small>
 									        </div>
                                         </div>
                                     </div>
@@ -282,25 +286,39 @@
                                             <?php if(isset($edit['split']['urls'])){
 
                                                 foreach ($edit['split']['urls'] as $key => $url) { $index = $index + $url['visit'];?>
-                                                <div class="col-md-12 m-t-10 url">
-                                                    <div class="col-md-10">
-                                                        <label for="split_rotator_url-'+indexcharp+'" class="col-sm-3 control-label">Url a Incrustar #<?php echo $key+1  ?></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" name="split_rotator_url[]" class="form-control" value="<?= $url['url'] ?>" />
-                                                            <input type="hidden" name="split_rotator_visit[]" value="<?= $url['visit'] ?>">
+                                                <div class="url <?php if($url['static'] == true){ ?> bg-warning <?php } ?> col-md-12">
+                                                    <div class="col-md-12 m-t-10 ">
+                                                        <div class="col-md-10">
+                                                            <label for="split_rotator_url-'+indexcharp+'" class="col-sm-3 control-label">Url a Incrustar #<?php echo $key+1  ?></label>
+                                                            <div class="col-sm-8">
+                                                                <input type="url" required="required" name="split_rotator_url[]" class="form-control" value="<?= $url['url'] ?>" />
+                                                                <input type="hidden" name="split_rotator_visit[]" value="<?= $url['visit'] ?>">
+                                                                <input type="hidden" name="split_rotator_conversions[]" value="<?= $url['conversions'] ?>">
+
+                                                            </div>
+                                                            <div class="col-sm-1 form-inline">
+                                                                <button type="button" class="btn btn-danger remove-url">Borrar</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-1 form-inline">
-                                                            <button type="button" class="remove-url">x</button>
+                                                        <div class="col-md-2">
+                                                            <div class="col-md-4 col-md-offset-2 text-center p-5 lead"><?= $url['visit'] ?></div>
+                                                            <div class="col-md-4 col-md-offset-2 text-center p-5 lead"><?= $url['conversions'] ?></div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <?php if($url['static'] == true){ ?>
-                                                            <div class="col-md-4 col-md-offset-2" style="background-color: green"><?= $url['visit'] ?></div>
-                                                        <?php } else {?>
-                                                            <div class="col-md-4 col-md-offset-2"><?= $url['visit'] ?></div>
-                                                        <?php } ?>
 
-                                                        <div class="col-md-4 col-md-offset-2">0</div>
+                                                    <div class="col-md-12 m-t-10 ">
+                                                        <div class="col-md-10">
+                                                            <label for="split_rotator_url-'+indexcharp+'" class="col-sm-3 control-label">Pixel de conversión</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" class="form-control" value='<img src="<?= get_site_url() ?>/wp-admin/admin-ajax.php?action=convertion&id=<?= $edit['ID'] ?>&url=<?= $url['url'] ?>">' />
+
+                                                            </div>
+                                                            <div class="col-sm-1 form-inline">
+                                                                <button type="button" class="btn btn-info remove-url">Copiar</button>
+                                                            </div>
+
+                                                        </div>
+                                                        <hr class="col-md-12">
                                                     </div>
                                                 </div>
 
@@ -324,7 +342,7 @@
                                                 <strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="text" class="form-control" name="visit-limit" value="<?php echo (isset($edit['split']['limit'])) ? $edit['split']['limit'] : 0 ?>">
+                                                <input type="text" class="form-control text-center" name="conversions-limit" value="<?php echo (isset($edit['split']['limit'])) ? $edit['split']['limit'] : 0 ?>">
                                             </div>
                                             <hr class="col-md-11">
                                         </div>
