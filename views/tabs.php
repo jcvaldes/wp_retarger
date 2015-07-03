@@ -282,10 +282,13 @@
                                         </div>
 
                                         <div class="row m-t-10" id="urls">
-                                        <? $index = 0; ?>
+                                        <? $index = $conversions = 0;  ?>
                                             <?php if(isset($edit['split']['urls'])){
 
-                                                foreach ($edit['split']['urls'] as $key => $url) { $index = $index + $url['visit'];?>
+                                                foreach ($edit['split']['urls'] as $key => $url) {
+                                                    $index = $index + $url['visit'];
+                                                    $conversions = $conversions + $url['conversions'];
+                                                    ?>
                                                 <div class="url <?php if($url['static'] == true){ ?> bg-warning <?php } ?> col-md-12">
                                                     <div class="col-md-12 m-t-10 ">
                                                         <div class="col-md-10">
@@ -294,7 +297,7 @@
                                                                 <input type="url" required="required" name="split_rotator_url[]" class="form-control" value="<?= $url['url'] ?>" />
                                                                 <input type="hidden" name="split_rotator_visit[]" value="<?= $url['visit'] ?>">
                                                                 <input type="hidden" name="split_rotator_conversions[]" value="<?= $url['conversions'] ?>">
-
+                                                                <input type="hidden" name="split_rotator_statics[]" value="<?= $url['static'] ?>">
                                                             </div>
                                                             <div class="col-sm-1 form-inline">
                                                                 <button type="button" class="btn btn-danger remove-url">Borrar</button>
@@ -333,13 +336,13 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="col-md-6 text-center" style="background-color:#eee;font-weight:bold"><?= $index ?></div>
-                                                <div class="col-md-6 text-center" style="background-color:#eee;font-weight:bold">0</div>
+                                                <div class="col-md-6 text-center" style="background-color:#eee;font-weight:bold"><?= $conversions ?></div>
                                             </div>
                                         </div>
 
                                         <div class="row m-t-10 hide" id="counter">
                                             <div class="col-md-10 text-right">
-                                                <strong>Número de Visitas hasta fijar la mejor Url(0 = no es fija)</strong>
+                                                <strong>Número de conversiones hasta fijar la URL (0 = no es fija)</strong>
                                             </div>
                                             <div class="col-md-2">
                                                 <input type="text" class="form-control text-center" name="conversions-limit" value="<?php echo (isset($edit['split']['limit'])) ? $edit['split']['limit'] : 0 ?>">

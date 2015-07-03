@@ -139,18 +139,36 @@ class Retarger
         $split = [];
         if(count($data['split_rotator_url'])){ //ENABLE
             $x = [];
+            $max = true;
+
             $visits = $data['split_rotator_visit'];
             $conversions = $data['split_rotator_conversions'];
+            $statics = $data['split_rotator_statics'];
+
+            $split['static'] = false; //default00000-
+            $split['limit'] = $limit = (isset($data['conversions-limit'])) ? $data['conversions-limit'] : 0;
+
             foreach ($data['split_rotator_url'] as $key => $surl) {
                 $v = (isset($visits[$key])) ? $visits[$key] : 0;
                 $c = (isset($conversions[$key])) ? $conversions[$key] : 0;
-                $aux = ['url' => $surl, 'visit' => $v, 'conversions' => $c, 'static' => false];
+
+                $s = false;
+
+                if($c >= $limit && $max){
+                    $s = true;
+                    $split['static'] = true; //set
+                    $max = false;
+                }
+
+                $aux = ['url' => $surl, 'visit' => $v, 'conversions' => $c, 'static' => $s];
                 array_push($x, $aux);
             }
 
+            //echo json_encode($x); exit;
+
             $split['urls'] = $x;
-            $split['limit'] = $data['conversions-limit'];
-            $split['static'] = false;
+
+
 
             $iframe = '<input type="hidden" id="split-test" value="true">' . $modal;
         }else{
@@ -260,10 +278,19 @@ class Retarger
         if(isset($this->items[$key])){
 
             if($this->items[$key]['split']['static'] == true){
-                foreach ($this->items[$key]['split']['urls'] as $key => $urls) {
+                foreach ($this->items[$key]['split']['urls'] as $i => $urls) {
                     if($urls['static'] == true){
                         $iframe = '<iframe src="'.$urls['url'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>';
-                        echo json_encode(['url' => $urls['url'], 'static' => $urls['visit'], 'iframe' => $iframe]);
+
+                        if(isset($this->items[$key]['split']['urls'][$i]['visit'])){
+                            $this->items[$key]['split']['urls'][$i]['visit'] = ($this->items[$key]['split']['urls'][$i]['visit']+1);
+                        }else{
+                            $this->items[$key]['split']['urls'][$i]['visit'] = 1;
+                        }
+                        //var_dump($this->items[$key]['split']['urls'][$i]);
+
+                        echo json_encode(['url' => $urls['url'], 'static' => $this->items[$key]['split']['urls'][$i]['visit'], 'iframe' => $iframe]);
+                        $this->save();
                         exit;
                     }
                 }
@@ -304,6 +331,8 @@ class Retarger
                         if($this->items[$key]['split']['urls'][$k]['conversions'] >= $limit && $limit > 0){
                             $this->items[$key]['split']['static'] = true;
                             $this->items[$key]['split']['urls'][$k]['static'] = true;
+                        }else{
+
                         }
                     }else{
                         $this->items[$key]['split']['urls'][$k]['conversions'] = 1;
