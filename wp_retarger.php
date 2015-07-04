@@ -41,7 +41,7 @@ function wp_retarger_menu_page()
     if (! current_user_can('manage_options')) {
         wp_die('Access Denied');
     }
-    /* copy template */
+    /* copy template
     $plugin_dir = plugin_dir_path( __FILE__ ) . 'views/retarger.php';
     $theme_dir = get_template_directory() . '/retarger.php';
 
@@ -50,7 +50,7 @@ function wp_retarger_menu_page()
             //echo "failed to copy $plugin_dir to $theme_dir...\n";
         }
     }
-    /* :copy template */
+    :copy template */
 
     /* permalink */
     //delete index.php from url
@@ -201,25 +201,31 @@ function prefix_ajax_convertion() {
 
 function get_retarger_post_type_template($single_template) {
  global $post;
-
- var_dump($post); exit;
-
+//echo json_encode($post); exit;
  if ($post->post_type == 'retarger') {
-      $single_template = dirname( __FILE__ ) . '/views/page.php';
+      $single_template = plugin_dir_path(__FILE__) . 'views/retarger.php';
+      include($single_template); exit;
  }
  return $single_template;
 }
 
 add_filter( "single_template", "get_retarger_post_type_template" ) ;
 
-/*
 
-function get_custom_post_type_template($single_template) {
-     global $post;
-
-     if ($post->post_type == 'my_post_type') {
-          $single_template = dirname( __FILE__ ) . '/post-type-template.php';
-     }
-     return $single_template;
+add_action( 'init', 'create_posttype' );
+function create_posttype() {
+  register_post_type( 'retarger',
+    array(
+      'labels' => array(
+        'name' => __( 'Retarger' ),
+        'singular_name' => __( 'Retarger' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'show_ui' => false,
+      'rewrite' => array('slug' => 'r', 'with_front' => FALSE),
+    )
+  );
+  //update_option('permalink_structure', '/%postname%/');
+  flush_rewrite_rules();
 }
-add_filter( 'single_template', 'get_custom_post_type_template' );*/

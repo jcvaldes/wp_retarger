@@ -154,7 +154,7 @@ class Retarger
 
                 $s = false;
 
-                if($c >= $limit && $max){
+                if($c >= $limit && $max && $limit != 0){
                     $s = true;
                     $split['static'] = true; //set
                     $max = false;
@@ -186,8 +186,8 @@ class Retarger
           'post_content'  => $pixel . $iframe . '<input type="hidden" id="router_id" value="'.$router_id.'">',
           'post_status'   => 'publish',
           'post_name'     => $data['name_router'],
-          'post_type'     => 'page',
-          'page_template' => 'retarger.php'
+          'post_type'     => 'retarger',
+          //'page_template' => 'retarger.php'
         );
 
         // Insert the post into the database
