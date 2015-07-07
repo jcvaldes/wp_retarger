@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <style type="text/css" media="screen">
         h1, span.edit-link {display: none; }
         #main-content {background-color: #fff !important; }
@@ -16,7 +16,8 @@
     <div id="main-content" class="main-content">
         <div id="primary" class="content-area">
             <div id="content" class="site-content" role="main">
-                <?= $post->post_content; ?>
+                <?php echo $post->post_content; ?>
+
             </div><!-- #content -->
         </div><!-- #primary -->
     </div><!-- #main-content -->

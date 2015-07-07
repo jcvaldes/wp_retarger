@@ -99,31 +99,6 @@
     									</table>
 
                                         <div class="form-group for-type-2">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="popup-width" class="col-sm-3 control-label">Ancho</label>
-
-                                                    <div class="col-sm-6">
-                                                        <div class="input-group">
-                                                            <input name="popup-width" type="text" class="form-control" value="<?php echo (isset($edit['popup']['width'])) ? $edit['popup']['width'] : '800'  ?>" aria-describedby="basic-addon2">
-                                                            <span class="input-group-addon" id="basic-addon2">px</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="popup-height" class="col-sm-3 control-label">Alto</label>
-
-                                                    <div class="col-sm-6">
-                                                        <div class="input-group">
-                                                            <input name="popup-height" type="text" class="form-control" value="<?php echo (isset($edit['popup']['height'])) ? $edit['popup']['height'] : '600'  ?>" aria-describedby="basic-addon2">
-                                                            <span class="input-group-addon" id="basic-addon2">px</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
 
                                             <div class="row m-t-20">
                                                 <div class="for-type-2">

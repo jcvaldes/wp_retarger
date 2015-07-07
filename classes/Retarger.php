@@ -73,9 +73,7 @@ class Retarger
 
         if($data['popup-type'] == 2){
             $boolModal = true;
-            $popup = [  'width' => $data['popup-width'],
-                        'height' => $data['popup-height'],
-                        'show' => $data['popup-show'],
+            $popup = [  'show' => $data['popup-show'],
                         'url' => $data['url-popup'],
                         'html' => $data['html-popup']
             ];
@@ -87,7 +85,7 @@ class Retarger
                 $content = "<p>".$popup['html']."</p>";
             }
 
-            $modal = ' <div class="modalb" id="modal" style="position:fixed; top:0px; left:0px;display:none;width:'.$popup['width'].'px;height:'.$popup['height'].'px; z-index:2;"> '.$content.' </div>';
+            $modal = ' <div class="modalb col-md-6" id="modal" style="position:fixed; top:0px; left:0px;display:none;height:400px;z-index:2;"> '.$content.' </div>';
 
         }else if($data['popup-type'] == 3){
             $boolModal = true;
