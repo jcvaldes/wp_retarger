@@ -76,8 +76,7 @@ class Templater
 
     public function split(){
         $r = $this->item;
-
-        if(isset($r)){
+        if(isset($r['split']) && count($r['split']) >0){
             if($r['split']['static'] == true){ // validate max convertions and static page
                 foreach ($r['split']['urls'] as $i => $urls) {
                     if($urls['static'] == true){
