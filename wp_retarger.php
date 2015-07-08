@@ -1,16 +1,15 @@
 <?php
 /*
- * Plugin Name: wp retarger
+ * Plugin Name: WP Retarger
  * Plugin URI: http://conecta2enlared.com/
- * Description: Herramientas de retargueting.
- * Version: El número de versión del plugin e.j.: 1.0
+ * Description: Herramientas de retargeting.
+ * Version: 1.0
  * Author: Conecta2
  * Author URI: http://conecta2enlared.com/
  * License: Todos Los Derechos Reservados
  */
 
 require 'classes/RoutersTable.php';
-require 'classes/Uploader.php';
 require 'classes/Retarger.php';
 
 $url_plugin = WP_PLUGIN_URL . "wp_retarger";
@@ -19,7 +18,7 @@ $myOptions = array();
 $retarger = new Retarger();
 //var_dump($retarger->getAll());exit;
 
-require 'licenser/licenser.php';
+require 'views/licenser.php';
 
 
 if(!$retarger->isActived() && $_REQUEST['page'] =='wp_retarger' ){
@@ -159,30 +158,6 @@ add_action('admin_head', 'wp_retarger_enqueue_styles_admin');
 add_action('init', 'wp_retarger_enqueue_styles_front');
 
 /* AJAX */
-add_action( 'wp_ajax_counter', 'prefix_ajax_counter' );
-add_action( 'wp_ajax_nopriv_counter', 'prefix_ajax_counter' );
-
-function prefix_ajax_counter() {
-    global $retarger;
-
-    $id = $_REQUEST['router_id'];
-
-    return $retarger->counter($id);
-}
-
-/* SPLIT AJAX */
-
-add_action( 'wp_ajax_splittest', 'prefix_ajax_splittest' );
-add_action( 'wp_ajax_nopriv_splittest', 'prefix_ajax_splittest' );
-
-function prefix_ajax_splittest() {
-    global $retarger;
-
-    $id = $_REQUEST['router_id'];
-
-    $retarger->split($id);
-    die();
-}
 
 add_action( 'wp_ajax_convertion', 'prefix_ajax_convertion' );
 add_action( 'wp_ajax_nopriv_convertion', 'prefix_ajax_convertion' );

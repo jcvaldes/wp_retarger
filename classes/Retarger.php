@@ -1,5 +1,8 @@
 <?php
 
+require 'Ruploader.php';
+require 'Templater.php';
+
 class Retarger
 {
     private $items = [];
@@ -7,88 +10,48 @@ class Retarger
     private $status = false;
     public $table;
 
+    private $ruploader;
+
     public function __construct(){
         //delete_option( 'retarger_license_key' );delete_option( 'retarger_license_status' );
         $this->items = $this->getAll();
         $this->table = new RoutersTable($this->items);
         $this->license = get_option( 'retarger_license_key' );
         $this->status = get_option( 'retarger_license_status' );
+
+        $this->ruploader = new Ruploader();
     }
+
+    /* CRUD */
 
     public function get($id){
         return $this->items[$this->find($id)];
     }
 
     public function store($data){
-        //var_dump($data);exit;
-        /* TYPE */
+        /* Vars */
         $popup = [];
         $modal = '';
         $router_id = uniqid();
 
-        $boolModal = false;
+        $visitas = (isset($data['visits'])) ? intval($data['visits']) : 0;
 
-        /* PICTURE */
-        $image = false;
-
-        $picture = $_FILES['picture'];
-
-        if($picture['error'] == 0){
-            $filetmp = $picture['tmp_name'];
-            //clean filename and extract extension
-            $filename = $picture['name'];
-            // get file info
-            $filetype = wp_check_filetype( basename( $filename ), null );
-            $filetitle = preg_replace('/\.[^.]+$/', '', basename( $filename ) );
-            $filename = $filetitle . '.' . $filetype['ext'];
-            $upload_dir = wp_upload_dir();
-            /**
-            * Check if the filename already exist in the directory and rename the file if necessary
-            */
-            $i = 0;
-            while ( file_exists( $upload_dir['path'] .'/' . $filename ) ) {
-                $filename = $filetitle . '_' . $i . '.' . $filetype['ext']; $i++;
-            }
-            $filedest = $upload_dir['path'] . '/' . $filename;
-            $image = $upload_dir['url'] . '/' . $filename;
-            /**
-            * Check write permissions
-            */
-            if ( !is_writeable( $upload_dir['path'] ) ) {
-                die('Unable to write to directory %s. Is this directory writable by the server?');
-                return;
-            }
-            /**
-            * Save temporary file to uploads dir
-            */
-            if ( !@move_uploaded_file($filetmp, $filedest) ){
-                die("Error, the file $filetmp could not moved to : $filedest ");
-                continue;
-            }
-
-        }else{
-            $image = $data['url_image_redirect'];
+        if(isset($data['id'])){
+            $router_id = $data['id'];
         }
 
+        /* PICTURE - Ruploader.php */
+        $image = $this->ruploader->upload($data['url_image_redirect']);
+
+        /* POPUP */
 
         if($data['popup-type'] == 2){
-            $boolModal = true;
             $popup = [  'show' => $data['popup-show'],
                         'url' => $data['url-popup'],
                         'html' => $data['html-popup']
             ];
-            $content = '';
-
-            if($popup['show'] == 'url'){
-                $content = '<iframe src="'.$popup['url'].'" width="100%" height="100%"  scrolling="no" frameborder="0" style="z-index:3;"></iframe>';
-            }else if($popup['show'] == 'html'){
-                $content = "<p>".$popup['html']."</p>";
-            }
-
-            $modal = ' <div class="modalb col-md-6" id="modal" style="position:fixed; top:0px; left:0px;display:none;height:400px;z-index:2;"> '.$content.' </div>';
 
         }else if($data['popup-type'] == 3){
-            $boolModal = true;
             $popup = [  'position' => $data['position'],
                         'click' => !!$data['image-click'],
                         'image-click-url' => $data['image-click-url'],
@@ -99,38 +62,9 @@ class Retarger
                                 'text' => $data['button-text'],
                                 'url' => $data['button-url'],
                                 'background' => $data['button-background'],
-                                'color' => $data['button-color'],
-
+                                'color' => $data['button-color']
                         ]
             ];
-
-            if($image){
-                $img = '<img class="img-responsive" src="'.$image.'" id="p3-image">';
-            }else{
-                $img = '<img class="img-responsive" src="https://en.opensuse.org/images/0/0b/Icon-user.png" id="p3-image">';
-            }
-
-            if(!!$data['image-click']){
-                $img = '<a href="'.$data['image-click-url'].'" >'. $img .'</a>';
-            }
-
-            $modal ='<div class="modalb" id="modal" style="display:none;width:600px;"  data-position="'.$data['position'].'"> <table width="100%"> <tr> <td width="100">'.$img.'</td> <td valign="top"> <p id="p3-title"></p> </td> <td valign="bottom" align="center"> <a id="p3-button" style="color:" href=""></a> </td> </tr> <tr><td colspan="3"><p id="p3-description"></p></td></tr></table> </div>';
-
-            $modal =   '<div class="modalb col-xs-10 col-sm-8 col-md-5 col-lg-5" id="modal" style="display:none;"  data-position="'.$data['position'].'">'.
-                            '<div class="row">' .
-                                '<div class="">' .
-                                    '<div class="col-md-3 col-xs-4">' .
-                                        $img .
-                                    '</div>'.
-                                    '<div class="col-md-9 col-xs-8">' .
-                                        '<h3>'.$data['title'].'</h3>' .
-                                        '<p id="p3-description">'.$data['description'].'</p>' .
-                                        '<a id="p3-button" class="btn pull-right" style="color:'.$data['button-color'].';background-color:'.$data['button-background'].'" href="'.$data['button-url'].'">'.$data['button-text'].'</a>' .
-                                    '</div>' .
-                                '</div>' .
-                            '</div>' .
-                        '</div>';
-           /* */
         }
 
         /* SPLIT TEST */
@@ -162,37 +96,25 @@ class Retarger
                 array_push($x, $aux);
             }
 
-            //echo json_encode($x); exit;
-
             $split['urls'] = $x;
-
-
-
-            $iframe = '<input type="hidden" id="split-test" value="true">' . $modal;
-        }else{
-            $iframe = '<iframe src="'.$data['urlembed_router'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>' . $modal;
         }
 
-        /* IFRAME */
 
-        $pixel = $data['wp_retarger_pixel'];
-
-
-        /* Create page */
+        /* Create retarger */
         $page = array(
           'post_title'    => wp_strip_all_tags($data['name_router']),
-          'post_content'  => $pixel . $iframe . '<input type="hidden" id="router_id" value="'.$router_id.'">',
+          'post_content'  => '',
           'post_status'   => 'publish',
           'post_name'     => $data['name_router'],
           'post_type'     => 'retarger',
-          //'page_template' => 'retarger.php'
+          'router_id'     => $router_id
         );
 
-        // Insert the post into the database
+        // Insert retarger into the database
         $post_id = wp_insert_post( $page );
+        add_post_meta( $post_id, 'router_id', $router_id);
 
-        $uploader = new Uploader();
-        $url_filename = $uploader->write();
+        //echo mysql_real_escape_string (($data['wp_retarger_pixel']));exit;
 
         $aux = array(
             'ID' => $router_id,
@@ -200,7 +122,7 @@ class Retarger
             'urlembed_router' => esc_html($data['urlembed_router']),
             'pixel' => ($data['wp_retarger_pixel']),
             'post_id' => $post_id,
-            'visits' => 0,
+            'visits' => $visitas,
             'type' => $data['popup-type'],
             'popup' => $popup,
             'split' => $split
@@ -209,22 +131,11 @@ class Retarger
         array_push($this->items, $aux);
         $this->save();
 
-        //var_dump($this->items); exit;
     }
 
     public function update($data){
-
         $this->delete($data['id']);
-        $this->store($data);
-        return;
-        $key = $this->find($data['id']);
-
-        $this->items[$key]['ID']  =   $val['ID'];
-        $this->items[$key]['name_router'] =   esc_html($data['name_router']);
-        $this->items[$key]['urlembed_router'] =   esc_html($data['urlembed_router']);
-        $this->items[$key]['pixel']   =   esc_html($data['wp_retarger_pixel']);
-
-        $this->save();
+        return $this->store($data);
     }
 
     public function delete($id){
@@ -239,6 +150,7 @@ class Retarger
         }
 
         wp_delete_post($this->items[$key]['post_id'], true);
+        delete_post_meta( $this->items[$key]['post_id'], 'router_id');
         array_splice($this->items, $key, 1);
         return $this->save();
     }
@@ -255,7 +167,7 @@ class Retarger
                 return $key;
            }
         }
-        return false;
+        return null;
     }
 
     public function save(){
@@ -263,55 +175,11 @@ class Retarger
         return update_option('wp_retarger', $this->items);
     }
 
-    public function counter($id){
-        $key = $this->find($id);
-        if(isset($this->items[$key])){
-            $this->items[$key]['visits'] = ($this->items[$key]['visits'] + 1);
+    public function refresh($item){
+        if(isset($item['ID'])){
+            $this->items[$this->find($item['ID'])] = $item;
+            return $this->save();
         }
-        $this->save();
-    }
-
-    public function split($id){
-        $key = $this->find($id);
-        if(isset($this->items[$key])){
-
-            if($this->items[$key]['split']['static'] == true){
-                foreach ($this->items[$key]['split']['urls'] as $i => $urls) {
-                    if($urls['static'] == true){
-                        $iframe = '<iframe src="'.$urls['url'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>';
-
-                        if(isset($this->items[$key]['split']['urls'][$i]['visit'])){
-                            $this->items[$key]['split']['urls'][$i]['visit'] = ($this->items[$key]['split']['urls'][$i]['visit']+1);
-                        }else{
-                            $this->items[$key]['split']['urls'][$i]['visit'] = 1;
-                        }
-                        //var_dump($this->items[$key]['split']['urls'][$i]);
-
-                        echo json_encode(['url' => $urls['url'], 'static' => $this->items[$key]['split']['urls'][$i]['visit'], 'iframe' => $iframe]);
-                        $this->save();
-                        exit;
-                    }
-                }
-            }
-
-
-            $urls = $this->items[$key]['split']['urls'];
-            $limit = $this->items[$key]['split']['limit'];
-
-            $u = array_rand($urls);
-            $u = rand(0, count($urls) - 1);
-
-            if(isset($this->items[$key]['split']['urls'][$u]['visit'])){
-                $this->items[$key]['split']['urls'][$u]['visit'] = ($this->items[$key]['split']['urls'][$u]['visit']+1);
-            }else{
-                $this->items[$key]['split']['urls'][$u]['visit'] = 1;
-            }
-
-            $iframe = '<iframe src="'.$urls[$u]['url'].'" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:0;"></iframe>';
-
-            echo json_encode(['url' => $urls[$u]['url'], 'visit' => $urls[$u]['visit'], 'iframe' => $iframe]);
-        }
-        $this->save();
     }
 
     public function conversion($id, $url){
@@ -326,7 +194,7 @@ class Retarger
                     if(isset($this->items[$key]['split']['urls'][$k]['conversions'])){
                         $this->items[$key]['split']['urls'][$k]['conversions'] = ($this->items[$key]['split']['urls'][$k]['conversions']+1);
 
-                        if($this->items[$key]['split']['urls'][$k]['conversions'] >= $limit && $limit > 0){
+                        if($this->items[$key]['split']['urls'][$k]['conversions'] >= $limit && $limit > 0 && ($this->items[$key]['split']['static'] != true) ){
                             $this->items[$key]['split']['static'] = true;
                             $this->items[$key]['split']['urls'][$k]['static'] = true;
                         }else{
@@ -341,8 +209,6 @@ class Retarger
         }
         $this->save();
     }
-
-
 
     /* Licenser */
 
@@ -370,7 +236,6 @@ class Retarger
         }
         return false;
     }
-
 
 }
 

@@ -1,4 +1,7 @@
-<?php /* Template Name: Retarger */ ?>
+<?php /* Template Name: Retarger */
+    $templater = new Templater();
+    $content = $templater->render(get_post_meta($post->ID, 'router_id', true));
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,8 +19,7 @@
     <div id="main-content" class="main-content">
         <div id="primary" class="content-area">
             <div id="content" class="site-content" role="main">
-                <?php echo $post->post_content; ?>
-
+                <?php echo $content; ?>
             </div><!-- #content -->
         </div><!-- #primary -->
     </div><!-- #main-content -->

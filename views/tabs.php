@@ -47,7 +47,7 @@
                                             <label for="name_router" class="col-sm-3 control-label">Nombre</label>
                                             <div class="col-sm-7">
                                             	<input type="text" id="nombre_ruta" name="name_router" class="form-control" value="<?= $edit['name_router'] ?>" />
-                                                <small>Url de Router, por ejemplo: <?= get_site_url() ?><strong>/ruta-redes</strong></small>
+                                                <small>Url de Router, por ejemplo: <?= get_site_url() ?>/r<strong>/ruta-redes</strong></small>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -84,13 +84,13 @@
                                         <table class="form-table" >
     										<tbody>
     											<tr valign="top" class="even">
-    												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup1.jpg'?>" width="180" height="120" />
+    												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../css/img/popup1.jpg'?>" width="180" height="120" />
     													<div class="pt-10" />
     													<input type="radio" class="popup-type" name="popup-type" value="1" checked><strong>Tipo 1</strong></td>
-    												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup2.jpg'?>" width="180" height="120" />
+    												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../css/img/popup2.jpg'?>" width="180" height="120" />
     													<div class="pt-10" />
     													<input type="radio" class="popup-type two" name="popup-type" value="2"><strong>Tipo 2</strong></td>
-    												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../img/popup3.jpg'?>" width="180" height="120" />
+    												<td><img src="<?php echo plugin_dir_url( __FILE__ )  . '../css/img/popup3.jpg'?>" width="180" height="120" />
     													<div class="pt-10" />
     													<input type="radio" class="popup-type tres" name="popup-type" value="3"><strong>Tipo 3</strong></td>
     											</tr>
@@ -241,7 +241,7 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                       					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" class="form-control col-md-12"><?= $edit[ 'pixel'] ?></textarea>
+                       					        <textarea id="wp_retarger_pixel" name="wp_retarger_pixel" rows="5" class="form-control col-md-12"><?= stripslashes($edit[ 'pixel']) ?></textarea>
                                                 <small>Escribe algún código para "Trackear" tu ruta. </small>
 									        </div>
                                         </div>
@@ -348,6 +348,7 @@
 									<?php if(isset($edit[ 'ID'])){  ?>
 									<input type="hidden" name="action" value="update">
 									<input type="hidden" name="id" value="<?= $edit['ID'] ?>">
+                                    <input type="hidden" name="visits" value="<?= $edit['visits'] ?>">
 									<input type="hidden" id="type" value="<?= $edit['type'] ?>">
 									<input type="hidden" id="type-show" value="<?= $edit['popup']['show'] ?>">
 									<?php } else { ?>
