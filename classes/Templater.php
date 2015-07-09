@@ -42,9 +42,9 @@ class Templater
                 $content = "<p>".$popup['html']."</p>";
             }
 
-            $modal =    '<div class="modalb col-xs-10 col-sm-8 col-md-6 col-lg-6" id="modal" style="position:fixed; top:0px; left:0px;display:none;z-index:2;height:auto">
+            $modal = '<div class="modalb col-xs-10 col-sm-8 col-md-6 col-lg-6" id="modal" style="position:fixed; top:0px; left:0px;display:none;z-index:2;height:auto">
                             <div class="embed-responsive embed-responsive-4by3">'.$content.'</div>
-                        </div>';
+                    </div>';
 
         }else if($data['type'] == 3){
 
@@ -73,6 +73,11 @@ class Templater
                             '</div>' .
                         '</div>';
             ;
+        }
+
+        if($modal!=''){
+            $d = (isset($popup['delay'])) ? (intval($popup['delay']) * 1000 ) : 7001;
+            $modal .= '<input type="hidden" id="delay" value="'. $d .'">';
         }
 
         $this->popup = $modal;

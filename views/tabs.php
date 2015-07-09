@@ -134,6 +134,18 @@
 
                                                 </div>
                                             </div>
+
+                                            <div class="row m-t-20">
+                                                <div class="for-type-2">
+                                                    <label for="url_image_redirect" class="col-sm-3 control-label">Tiempo de espera (seg):</label>
+                                                    <div class="col-sm-7">
+                                                        <?php $delay = (isset($edit['popup']['delay'])) ? $edit['popup']['delay'] : 7; ?>
+                                                        <input type="number" name="delay-p2" value="<?= $delay ?>" placeholder="" min="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
 
                                         <div class="form-group for-type-3">
@@ -176,6 +188,17 @@
 													<textarea name="description" rows="5" class="form-control"><?php echo (isset($edit['popup']['description'])) ? $edit['popup']['description'] : ''  ?></textarea>
 								              </div>
 
+                                            </div>
+
+
+                                            <div class="row m-t-20">
+                                                <div class="">
+                                                    <label for="url_image_redirect" class="col-sm-3 control-label">Tiempo de espera (seg):</label>
+                                                    <div class="col-sm-7">
+                                                        <?php $delay = (isset($edit['popup']['delay'])) ? $edit['popup']['delay'] : 7; ?>
+                                                        <input type="number" name="delay-p3" value="<?= $delay ?>" placeholder="" min="1">
+                                                    </div>
+                                                </div>
                                             </div>
 
 

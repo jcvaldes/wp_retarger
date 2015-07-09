@@ -48,7 +48,8 @@ class Retarger
         if($data['popup-type'] == 2){
             $popup = [  'show' => $data['popup-show'],
                         'url' => $data['url-popup'],
-                        'html' => $data['html-popup']
+                        'html' => $data['html-popup'],
+                        'delay' => $data['delay-p2']
             ];
 
         }else if($data['popup-type'] == 3){
@@ -58,6 +59,7 @@ class Retarger
                         'title' => $data['title'],
                         'image' => $image,
                         'description' => $data['description'],
+                        'delay' => $data['delay-p3'],
                         'button' => [
                                 'text' => $data['button-text'],
                                 'url' => $data['button-url'],

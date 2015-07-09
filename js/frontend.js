@@ -1,12 +1,14 @@
 (function($){
     var $ = jQuery;
     jQuery(document).on('ready', function($) {
+        $delay = parseInt(jQuery("#delay").val()) || 7002;
         setTimeout(function(){
             jQuery("#modal").modal({
                 fadeDuration: 1000,
                 fadeDelay: 0.30
             });
-        }, 3000);
+            //alert($delay);
+        }, $delay);
     });
 })(jQuery);
 
