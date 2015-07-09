@@ -38,6 +38,11 @@
 										href="javascript:void( 0 );"
 										title="Split Testing"> Split Test/Rotator </a>
 
+                                    <a
+                                        class="nav-tab" rel="avp_unicode_charkbd_admin_menu_panel_5"
+                                        href="javascript:void( 0 );"
+                                        title="Exit Popup"> Exit Popup </a>
+
 								</h3>
 								<!-- Nav tabs -->
 								<form name="wp_retarger_form" id="wp_retarger_form" method="post" class="form-horizontal" role="form" action="?page=wp_retarger" enctype="multipart/form-data">
@@ -237,7 +242,7 @@
                                    </div>
 
 
-								   <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
+								    <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_3' style='display: none;'>
 
                                         <div class="form-group">
                                             <div class="col-sm-12">
@@ -341,6 +346,26 @@
                                         </div>
 
                                     </div>
+
+                                    <div class="nav-tab-contents  m-t-20" id='avp_unicode_charkbd_admin_menu_panel_5' style='display: none;'>
+
+                                        <div class="form-group">
+                                            <label for="url_image_redirect" class="col-sm-3 control-label">Descripción del Popup: </label>
+                                            <div class="col-sm-7">
+                                                <textarea id="exit_popup_description" name="exit_popup_description" rows="5" class="form-control col-md-12"><?= ($edit['exit_popup']['description']) ?></textarea>
+                                                <small>Mensaje que se mostrará si el usuario intenta salir del sitio.</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exit_popup_url" class="col-sm-3 control-label">Redirección web: </label>
+                                            <div class="col-sm-7">
+                                                 <input type="url" id="exit_popup_url" name="exit_popup_url" class="form-control" value="<?= ($edit['exit_popup']['url']) ?>" />
+                                                 <small>Si el usuario decide quedarse se redireccionará a esta web (dejar en blanco y permanece en el mismo).</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                      <br>
 									<p>
 										<input class="btn btn-primary" type="submit" name="wp_retarger_username_submit" value="Guardar" />

@@ -5,14 +5,15 @@ class Templater
     private $item;
     private $retarger;
 
-    private $popup = '';
-    private $iframe = '';
+    public $popup = '';
+    public $iframe = '';
+    public $exit_popup = '';
 
     public function __construct(){
         $this->retarger = new Retarger();
     }
 
-    function render($id){
+    function get($id){
         $this->item = $this->retarger->get($id);
 
         /* POPUP */
@@ -21,7 +22,10 @@ class Templater
         /* SPLIT TEST */
         $this->split();
 
-        return "\xA".$this->iframe . "\xA"."\xA" . $this->popup ."\xA"."\xA" . stripslashes($this->item['pixel']);
+        /* EXIT POPUP */
+        $this->exitPopup();
+
+        //return "\xA".$this->iframe . "\xA"."\xA" . $this->popup ."\xA"."\xA" . stripslashes($this->item['pixel']);
     }
 
     function popup()
@@ -110,6 +114,12 @@ class Templater
             $r['visits'] = (intval($r['visits']) + 1);
         }
         $this->retarger->refresh($r); //save changes
+    }
+
+
+    public function exitPopup(){
+        $r = $this->item;
+        $this->exit_popup = $r['exit_popup'];
     }
 
     /* Template Functions */

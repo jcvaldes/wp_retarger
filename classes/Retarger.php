@@ -99,6 +99,11 @@ class Retarger
             $split['urls'] = $x;
         }
 
+        /* Exit Popup */
+        $exit_popup = [];
+
+        $exit_popup['description'] = $data['exit_popup_description'];
+        $exit_popup['url'] = $data['exit_popup_url'];
 
         /* Create retarger */
         $page = array(
@@ -125,7 +130,8 @@ class Retarger
             'visits' => $visitas,
             'type' => $data['popup-type'],
             'popup' => $popup,
-            'split' => $split
+            'split' => $split,
+            'exit_popup' => $exit_popup
         );
 
         array_push($this->items, $aux);

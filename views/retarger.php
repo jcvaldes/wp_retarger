@@ -1,6 +1,8 @@
 <?php /* Template Name: Retarger */
     $templater = new Templater();
-    $content = $templater->render(get_post_meta($post->ID, 'router_id', true));
+    $retarger = $templater->get(get_post_meta($post->ID, 'router_id', true));
+
+    //var_dump($templater); exit;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +21,24 @@
     <div id="main-content" class="main-content">
         <div id="primary" class="content-area">
             <div id="content" class="site-content" role="main">
-                <?php echo $content; ?>
+                <?php echo $templater->iframe; ?>
+
+                <!-- Popup -->
+                <?php echo $templater->popup; ?>
+
+                <!-- Exit Popup -->
+
+
+
+                <script type="text/javascript">
+                    var exitsplashalertmessage = '<?php echo $templater->exit_popup['description']; ?>';
+                    var exitsplashmessage = '<?php echo $templater->exit_popup['description']; ?>';
+                    var exitsplashpage = '<?php echo $templater->exit_popup['url']; ?>';
+                    var exitsplashhelper = '<?php echo $templater->exit_popup['url']; ?>';
+                </script>
+
+
+
             </div><!-- #content -->
         </div><!-- #primary -->
     </div><!-- #main-content -->
@@ -28,5 +47,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="<?= plugin_dir_url(__FILE__) ?>../js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
-<script src="<?= plugin_dir_url(__FILE__) ?>../js/split-test-frontend.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?= plugin_dir_url(__FILE__) ?>../js/frontend.js" type="text/javascript" charset="utf-8"></script>
 </html>
